@@ -1,0 +1,83 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e9ebee;
+}
+
+#js1 {
+    display: none;
+}
+
+#js2 {
+    display: block;
+}
+
+.register {
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 40px 20px;
+    height: 100%;
+    text-align: center;
+}
+
+.login {
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 40px 20px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.card {
+    box-shadow: 2px 7px 14px #888888;
+    background-color: #ffffff;
+    position: relative;
+    text-align: center;
+    padding-bottom: 4em;
+    width: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.top {
+    text-align: center;
+    height: 70px;
+}
+
+button {
+    width: 300px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+@media screen and (max-width:360px) {
+    input {
+        width: 100%;
+    }
+    button {
+        width: 100%
+    }
+    .card {
+        width: 100%;
+    }
+}
