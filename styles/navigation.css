@@ -1,10 +1,12 @@
 nav {
     display: block;
     position: absolute;
-    width: 100vw;
+    width: 100%;
     height: 4em;
     left: 0;
     top: 0;
+    overflow-x: hidden;
+    border: 1px solid block;
 }
 
 .navigation-bar {
@@ -47,6 +49,7 @@ nav {
     background: #17252A;
     transform: translateX(-100%);
     transition: .5s;
+    z-index: 5;
 }
 
 .slider-activated {

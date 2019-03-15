@@ -1,3 +1,210 @@
 body {
-    background-color: #FEFFFF
+    background-color: #e9ebee;
+    margin-top: 5em;
+    margin-left: 2em;
+    margin-right: 2em;
+    text-align: center;
+}
+
+.filter-list {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+
+.filter-list-object {
+    padding: 1em 1em;
+    display: block;
+    text-align: left;
+    background: #ffffff;
+    margin: 1em 0px;
+    border-radius: 3px;
+    box-shadow: 2px 7px 14px #888888;
+}
+
+.filter-list-object:first-child {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.filter-list-object:first-child h1 {
+    left: -44%;
+}
+
+.filter-list-object h1 {
+    position: relative;
+    left: -8px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.filter-list-object input[type="range"] {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.filter-list-object input[type="range"]:hover {
+    opacity: 1;
+}
+
+.filter-list-object input[type="range"]:first-child {
+    right: 40px;
+}
+
+.filter-list-object input[type="range"]:nth-child(2) {
+    left: 4px;
+}
+
+.filter-list-object input[type="text"] {
+    font-size: 15px;
+    border: none;
+    border-bottom: 1px solid blue;
+    padding: 0em 1em;
+    transition: .25s;
+}
+
+.filter-list-object input[type="text"]:focus {
+    outline: none;
+    border-bottom: 2px solid blue;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.filter-list-object input[type="checkbox"] {
+    display: none;
+}
+
+.filter-list-object label {
+    position: relative;
+    width: auto;
+    display: block;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    padding: 5px 18px;
+    margin: 5px 0px;
+    transition: .25s;
+}
+
+.filter-list-object .check-box:hover {
+    padding-left: 22px;
+}
+
+.filter-list-object .check-box::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    content: " ";
+    width: 10px;
+    height: 10px;
+    border: 1px solid blue;
+    border-radius: 3px;
+    transform: translateY(-50%);
+    transition: .25s;
+}
+
+.filter-list-object input[type="checkbox"]:checked+.check-box {
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.filter-list-object input[type="checkbox"]:checked+.check-box:before {
+    width: 100%;
+    height: 130%;
+    background: blue;
+    top: 53%;
+    border: none;
+    border-radius: 5px;
+    z-index: -1;
+}
+
+.age {
+    margin-top: 20px;
+    display: inline-block;
+    width: 30px;
+    border: 1px solid blue !important;
+    text-align: center;
+}
+
+.contacts-list {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 55%;
+}
+
+.card {
+    display: inline-block;
+    position: relative;
+    width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    /* border: 1px grey solid; */
+    margin: 1em;
+    box-shadow: 2px 7px 14px #888888;
+}
+
+.card-up {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    background: white;
+    color: black;
+    height: 200px;
+    text-align: center;
+}
+
+.card-up>h1 {
+    position: absolute;
+    width: 90%;
+    max-height: 150px;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-down {
+    position: relative;
+    background: darkblue;
+    height: 150px;
+    color: white;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.card-down * {
+    width: 100%;
+}
+
+.card-down>h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-down>h2 {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-down>img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
 }

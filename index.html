@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|PT+Sans" rel="stylesheet">
     <link href="/styles/reseter.css" rel="stylesheet">
     <link href="/styles/navigation.css" rel="stylesheet">
     <link href="/styles/index.css" rel="stylesheet">
@@ -28,20 +29,130 @@
             <button id="show-slider" onclick="showSlider()">Menu</button>
             <h5 id="website-name">OnCo</h5>
         </div>
-        <div id="left-slider" class="slider">
-            <section>
-                <button onclick="closeSlider()">X</button>
-            </section>
-            <a href="#">Home</a>
-            <a href="#">Option 2</a>
-            <a href="#">Option 3</a>
-            <a href="#">Option 4</a>
-            <a href="#">Option 5</a>
-            <a href="#">Option 6</a>
-            <a href="#">Option 7</a>
-            <a href="#">Option 8</a>
-        </div>
     </nav>
+    <div id="left-slider" class="slider">
+        <section>
+            <button onclick="closeSlider()">❌</button>
+        </section>
+        <a href="#">Home</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+        <a href="#">Option 4</a>
+        <a href="#">Option 5</a>
+        <a href="#">Option 6</a>
+        <a href="#">Option 7</a>
+        <a href="#">Option 8</a>
+    </div>
+
+    <div class="filter-list">
+        <div class="filter-list-object">
+            <h1>Varsta</h1>
+            <input type="range" min="8" max="56" value="8">
+            <input type="range" min="56" max="120" value="120">
+            <input class="age" type="text" value="8" /> -
+            <input class="age" type="text" value="120" />
+        </div>
+        <div class="filter-list-object">
+            <h1>Locatie</h1>
+            <input id="iasi" type="checkbox" value="Iasi" />
+            <label for="iasi" class="check-box">Iasi</label>
+            <input id="bucuresti" type="checkbox" value="Bucuresti" />
+            <label for="bucuresti" class="check-box">Bucuresti</label>
+            <input id="cluj" type="checkbox" value="Cluj" />
+            <label for="cluj" class="check-box">Cluj</label>
+            <input id="timisoara" type="checkbox" value="Timisoara" />
+            <label for="timisoara" class="check-box">Timisoara</label>
+        </div>
+        <div class="filter-list-object">
+            <h1>Scoala / Facultate</h1>
+            <input id="fii" type="checkbox" value="FII" />
+            <label for="fii" class="check-box">Facultatea de Informatica</label>
+            <input id="feaa" type="checkbox" value="FEAA" />
+            <label for="feaa" class="check-box">Facultatea de Economie și Administrarea Afacerilor</label>
+            <input id="etti" type="checkbox" value="ETTI" />
+            <label for="etti" class="check-box">Facultatea de Electronică, Telecomunicații și Tehnologia Informației</label>
+            <input id="chimie" type="checkbox" value="Chimie" />
+            <label for="chimie" class="check-box">Facultatea de Chimie</label>
+        </div>
+        <div class="filter-list-object">
+            <h1>Interese</h1>
+            <input type="text" placeholder="ceai filme" />
+        </div>
+
+    </div>
+
+    <ul class="contacts-list">
+        <li class="card">
+            <div class="card-up">
+                <h1 class="description">
+                    "Am aparut in Singur Acasa 2"
+                </h1>
+            </div>
+            <div class="card-down">
+                <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/03/08/17/trump-2020-what-if.jpg" alt="Profile picture" />
+                <h3>
+                    Donald Trump
+                </h3>
+                <h2>Telefon: +40712345678</h2>
+            </div>
+        </li>
+        <li class="card">
+            <div class="card-up">
+                <h1 class="description">
+                    "Klausssss"
+                </h1>
+            </div>
+            <div class="card-down">
+                <img src="https://www.capital.ro/uploads/cache/2018-09/iohannis-55856000-605x340.jpg" alt="Profile picture" />
+                <h3>
+                    Klaus Iohannis
+                </h3>
+                <h2>Telefon: +40712345679</h2>
+            </div>
+        </li>
+        <li class="card">
+            <div class="card-up">
+                <h1 class="description">
+                    "Macaroane"
+                </h1>
+            </div>
+            <div class="card-down">
+                <img src="https://ichef.bbci.co.uk/news/660/cpsprodpb/F8C6/production/_103568636_gettyimages-1036307366.jpg" alt="Profile picture" />
+                <h3>
+                    Emmanuel Macron
+                </h3>
+                <h2>Telefon: +40712345670</h2>
+            </div>
+        </li>
+        <li class="card">
+            <div class="card-up">
+                <h1 class="description">
+                    "Am rachete nucleare"
+                </h1>
+            </div>
+            <div class="card-down">
+                <img src="https://cdn.theatlantic.com/assets/media/img/mt/2018/07/RTX6C7C1-1/lead_720_405.jpg" alt="Profile picture" />
+                <h3>
+                    Vladimir Putin
+                </h3>
+                <h2>Telefon: +40712345670</h2>
+            </div>
+        </li>
+        <li class="card">
+            <div class="card-up">
+                <h1 class="description">
+                    "Si eu am rachete nucleare"
+                </h1>
+            </div>
+            <div class="card-down">
+                <img src="https://cdnph.upi.com/svc/sv/i/2491477070462/2016/1/14770705616201/Kim-Jong-Un-maintains-weight-gain-drinks-excessively-report-says.jpg" alt="Profile picture" />
+                <h3>
+                    Kim Jong Un
+                </h3>
+                <h2>Telefon: +40712345670</h2>
+            </div>
+        </li>
+    </ul>
 
 </body>
 
