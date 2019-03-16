@@ -23,13 +23,18 @@ body {
     box-shadow: 2px 7px 14px #888888;
 }
 
-.filter-list-object:first-child {
+.filter-list-object:first-child,
+.filter-list-object:last-child {
     margin-top: 0px;
     text-align: center;
 }
 
 .filter-list-object:first-child h1 {
     left: -44%;
+}
+
+.filter-list-object:last-child h1 {
+    left: -41%;
 }
 
 .filter-list-object h1 {
@@ -64,17 +69,20 @@ body {
 }
 
 .filter-list-object input[type="text"] {
+    font-family: 'PT Sans', sans-serif;
     font-size: 15px;
     border: none;
     border-bottom: 1px solid blue;
-    padding: 0em 1em;
+    padding: 0em .5em;
     transition: .25s;
+    width: 80%;
+    float: center;
 }
 
 .filter-list-object input[type="text"]:focus {
     outline: none;
-    border-bottom: 2px solid blue;
-    font-family: 'PT Sans', sans-serif;
+    border-bottom: 1px solid black;
+    padding: 0em 1em;
 }
 
 .filter-list-object input[type="checkbox"] {
@@ -125,10 +133,12 @@ body {
     z-index: -1;
 }
 
-.age {
+input[type="number"] {
+    position: relative;
     margin-top: 20px;
     display: inline-block;
-    width: 30px;
+    width: 80px;
+    left: 15%;
     border: 1px solid blue !important;
     text-align: center;
 }
@@ -137,23 +147,33 @@ body {
     position: relative;
     display: inline-block;
     text-align: center;
-    width: 55%;
+    width: 60%;
 }
 
 .card {
     display: inline-block;
     position: relative;
-    width: 300px;
+    width: 250px;
     height: 350px;
-    border-radius: 10px;
-    /* border: 1px grey solid; */
-    margin: 1em;
+    border-radius: 5px;
+    margin: .5em;
     box-shadow: 2px 7px 14px #888888;
 }
 
+.card:hover:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+}
+
 .card-up {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     position: relative;
     background: white;
     color: black;
@@ -166,6 +186,8 @@ body {
     width: 90%;
     max-height: 150px;
     font-size: 20px;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -177,8 +199,8 @@ body {
     height: 150px;
     color: white;
     text-align: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .card-down * {
@@ -189,11 +211,16 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 19px;
     transform: translate(-50%, -50%);
 }
 
 .card-down>h2 {
     position: absolute;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
