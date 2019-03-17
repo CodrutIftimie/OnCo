@@ -1,3 +1,7 @@
+nav {
+    z-index: 5;
+}
+
 .navigation-bar {
     position: absolute;
     background-color: #24292e;
@@ -126,4 +130,10 @@
 
 .slider a:last-child {
     border-bottom: .5px solid #DEF2F1;
+}
+
+@media screen and (max-width: 650px) {
+    .slider {
+        width: 100%;
+    }
 }
