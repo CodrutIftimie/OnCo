@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="styles//reseter.css" rel="stylesheet">
+    <link href="/styles/add_contact.css" rel="stylesheet">
+    <link href="/styles/navigation.css" rel="stylesheet">
+
+    <title>Adaugare Contact</title>
+</head>
+
+<body>
+    <nav>
+        <div class="navigation-bar">
+            <button id="show-slider" onclick="showSlider()">Meniu</button>
+            <h5 id="website-name">OnCo</h5>
+            <a href="profile.html">Profil</a>
+        </div>
+        <div id="left-slider" class="slider">
+            <section>
+                <button onclick="closeSlider()">❌</button>
+            </section>
+            <a href="index.html">Acasa</a>
+            <a href="add_contact.html">Adauga un contact</a>
+            <a href="#">Option 3</a>
+            <a href="#">Option 4</a>
+            <a href="#">Option 5</a>
+            <a href="#">Option 6</a>
+            <a href="#">Option 7</a>
+            <a href="#">Delogare</a>
+        </div>
+    </nav>
+    <div class="card">
+
+        <div id="add_contact">
+
+            <h1>Adauga un contact</h1>
+
+            <form action="#">
+                <label for="nume_prenume">Nume complet</label><br>
+                <input id="nume_prenume" type="text" name="name" placeholder="Introduceti numele si prenumele"><br>
+                <label for="adresa">Adresa</label><br>
+                <input id="adresa" type="text" name="adresa" placeholder="Strada. Bloc. Ap. Nr."><br>
+                <label for="data_nastere">Data nastere</label><br>
+                <input id="data_nastere" type="date" name="data_nastere"><br>
+                <label for="email">E-mail</label><br>
+                <input id="email" type="email" name="email" placeholder="Introduceti un E-mail"><br>
+                <label for="nr_telefon">Numar de telefon</label><br>
+                <input id="nr_telefon" type="text" name="nr_telefon" placeholder="0712345678"><br>
+                <label for="adresa_web">Adresa web</label><br>
+                <input id="adresa_web" type="text" name="adresa_web" placeholder="https://web-adress.com"><br>
+                <label for="descriere">Descriere</label><br>
+                <textarea id="descriere" cols="54" rows="5" placeholder="Introduceti o descriere"></textarea><br>
+                <label for="interese">Interese</label><br>
+                <input id="interese" type="text" name="interese" placeholder="Introduceti interese"><br>
+
+
+
+
+                <br><br>
+                <button type="submit" value="adauga_contact">Adauga contact</button><br>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
