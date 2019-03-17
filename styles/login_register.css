@@ -41,10 +41,10 @@ input {
 .card {
     box-shadow: 2px 7px 14px #888888;
     background-color: #ffffff;
-    position: relative;
+    position: absolute;
     text-align: center;
     padding-bottom: 4em;
-    width: 500px;
+    width: 450px;
     left: 50%;
     transform: translateX(-50%);
 }
