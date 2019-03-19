@@ -40,7 +40,7 @@ input {
     text-align: center;
 }
 
-button {
+input[type="submit"] {
     width: 400px;
     background-color: #0000FF;
     color: white;
@@ -66,6 +66,18 @@ button:hover {
 
 body {
     background-color: #e9ebee
+}
+
+button {
+    width: 300px;
+    background-color: blue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
 }
 
 @media screen and (max-width:420px) {
