@@ -52,7 +52,7 @@ input[type="submit"] {
     text-align: center;
 }
 
-button:hover {
+form button:hover {
     background-color: #00008B
 }
 
@@ -68,7 +68,7 @@ body {
     background-color: #e9ebee
 }
 
-button {
+form button {
     width: 300px;
     background-color: blue;
     color: white;
