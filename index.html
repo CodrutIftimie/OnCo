@@ -26,64 +26,63 @@
             <a href="profile.html">Profil</a>
         </div>
         <div id="left-slider" class="slider">
-            <section>
+            <div>
                 <button onclick="closeSlider()">❌</button>
-            </section>
+            </div>
             <a href="index.html">Acasa</a>
             <a href="add_contact.html">Adauga un contact</a>
-            <a href="#">Option 3</a>
-            <a href="#">Option 4</a>
-            <a href="#">Option 5</a>
             <a href="groups.html">Gestioneaza gruparile</a>
+            <a href="#">Export contacte vCard</a>
+            <a href="#">Export contact CSV</a>
+            <a href="#">Feed Atom</a>
             <a href="profile.html">Editeaza Profilul</a>
             <a href="#">Delogare</a>
         </div>
     </nav>
     <button id="show-filters" onclick="showFilters()">Filtre</button>
-    <div class="filter-list">
+    <form class="filter-list" method="GET" action="index.html">
         <button id="close-filters" onclick="closeFilters()">❌ Inchide</button>
         <button id="apply-filters" onclick="applyFilters()">Aplica</button>
         <div class="filter-list-object">
             <h1>Nume</h1>
-            <input type="text" placeholder="Klaus" />
+            <input name="name" type="text" placeholder="Klaus" />
         </div>
         <div class="filter-list-object">
             <h1>Varsta</h1>
-            <input id="age-min" type="range" min="8" max="56" value="8">
-            <input id="age-max" type="range" min="56" max="120" value="120">
-            <input id="age-min-input" class="age" type="number" value="8" min="8" max="56" />
-            <input id="age-max-input" class="age" type="number" value="120" min="56" max="120" />
+            <input name="age-min" id="age-min-input" class="age" type="number" value="8" min="8" max="56" />
+            <input name="age-max" id="age-max-input" class="age" type="number" value="120" min="56" max="120" />
         </div>
         <div class="filter-list-object">
             <h1>Locatie</h1>
-            <input id="iasi" type="checkbox" value="Iasi" />
+            <input name="location" id="iasi" type="checkbox" value="Iasi" />
             <label for="iasi" class="check-box">Iasi</label>
-            <input id="bucuresti" type="checkbox" value="Bucuresti" />
+            <input name="location" id="bucuresti" type="checkbox" value="Bucuresti" />
             <label for="bucuresti" class="check-box">Bucuresti</label>
-            <input id="cluj" type="checkbox" value="Cluj" />
+            <input name="location" id="cluj" type="checkbox" value="Cluj" />
             <label for="cluj" class="check-box">Cluj</label>
-            <input id="timisoara" type="checkbox" value="Timisoara" />
+            <input name="location" id="timisoara" type="checkbox" value="Timisoara" />
             <label for="timisoara" class="check-box">Timisoara</label>
         </div>
         <div class="filter-list-object">
             <h1>Scoala / Facultate</h1>
-            <input id="fii" type="checkbox" value="FII" />
+            <input name="studies" id="fii" type="checkbox" value="FII" />
             <label for="fii" class="check-box">Facultatea de Informatica</label>
-            <input id="feaa" type="checkbox" value="FEAA" />
+            <input name="studies" id="feaa" type="checkbox" value="FEAA" />
             <label for="feaa" class="check-box">Facultatea de Economie și
                     Administrarea Afacerilor</label>
-            <input id="etti" type="checkbox" value="ETTI" />
+            <input name="studies" id="etti" type="checkbox" value="ETTI" />
             <label for="etti" class="check-box">Facultatea de Electronică,
                     Telecomunicații și Tehnologia Informației</label>
-            <input id="chimie" type="checkbox" value="Chimie" />
+            <input name="studies" id="chimie" type="checkbox" value="Chimie" />
             <label for="chimie" class="check-box">Facultatea de Chimie</label>
         </div>
         <div class="filter-list-object">
             <h1>Interese</h1>
-            <input type="text" placeholder="ceai filme" />
+            <input name="interests" type="text" placeholder="ceai filme" />
         </div>
+        <input type="submit" style="display:none" />
 
-    </div>
+    </form>
 
     <ul class="contacts-list">
         <li class="group-start">
