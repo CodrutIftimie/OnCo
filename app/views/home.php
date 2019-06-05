@@ -3,6 +3,8 @@
 class HomeView extends View {
     protected $headTags = [];
     protected $body = '';
+    protected $contacts = null;
+    protected $groups = null;
 
     public function __construct() {
         array_push($this->headTags, '<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">');
@@ -13,6 +15,9 @@ class HomeView extends View {
         array_push($this->headTags, '<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">');
         array_push($this->headTags, '<link href="/../../public/styles/reseter.css" rel="stylesheet">');
         array_push($this->headTags, '<link href="/../../public/styles/index.css" rel="stylesheet">');
+    }
+
+    public function constructBody() {
         $this->body = 
         '<button id="show-filters" onclick="showFilters()">Filtre</button>
         <form class="filter-list" method="GET" action="index.html">
@@ -58,193 +63,45 @@ class HomeView extends View {
             <input type="submit" style="display:none" />
     
         </form>
-    
-        <ul class="contacts-list">
-            <li class="group-start">
-                <p>Presedinti</p>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Am aparut in Singur Acasa 2"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/03/08/17/trump-2020-what-if.jpg" alt="Profile picture" />
-                    <h3>
-                        Donald Trump
-                    </h3>
-                    <h2>Telefon: +40712345678</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Donald Trump</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">"Klausssss"</h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://www.capital.ro/uploads/cache/2018-09/iohannis-55856000-605x340.jpg" alt="Profile picture" />
-                    <h3>Klaus Iohannis</h3>
-                    <h2>Telefon: +40712345679</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Klaus Iohannis</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Macaroane"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://ichef.bbci.co.uk/news/660/cpsprodpb/F8C6/production/_103568636_gettyimages-1036307366.jpg" alt="Profile picture" />
-                    <h3>
-                        Emmanuel Macron
-                    </h3>
-                    <h2>Telefon: +40712345670</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Emanuel Macron</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Am rachete nucleare"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://cdn.theatlantic.com/assets/media/img/mt/2018/07/RTX6C7C1-1/lead_720_405.jpg" alt="Profile picture" />
-                    <h3>
-                        Vladimir Putin
-                    </h3>
-                    <h2>Telefon: +40712345671</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Vladimir Putin</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Si eu am rachete nucleare"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://cdnph.upi.com/svc/sv/i/2491477070462/2016/1/14770705616201/Kim-Jong-Un-maintains-weight-gain-drinks-excessively-report-says.jpg" alt="Profile picture" />
-                    <h3>
-                        Kim Jong Un
-                    </h3>
-                    <h2>Telefon: +40712345672</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Kim Jong Un</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Am aparut in Singur Acasa 2"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/03/08/17/trump-2020-what-if.jpg" alt="Profile picture" />
-                    <h3>
-                        Donald Trump
-                    </h3>
-                    <h2>Telefon: +40712345678</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Donald Trump</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">"Klausssss"</h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://www.capital.ro/uploads/cache/2018-09/iohannis-55856000-605x340.jpg" alt="Profile picture" />
-                    <h3>Klaus Iohannis</h3>
-                    <h2>Telefon: +40712345679</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Klaus Iohannis</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Macaroane"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://ichef.bbci.co.uk/news/660/cpsprodpb/F8C6/production/_103568636_gettyimages-1036307366.jpg" alt="Profile picture" />
-                    <h3>
-                        Emmanuel Macron
-                    </h3>
-                    <h2>Telefon: +40712345670</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Emanuel Macron</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Am rachete nucleare"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://cdn.theatlantic.com/assets/media/img/mt/2018/07/RTX6C7C1-1/lead_720_405.jpg" alt="Profile picture" />
-                    <h3>
-                        Vladimir Putin
-                    </h3>
-                    <h2>Telefon: +40712345671</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Vladimir Putin</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
-            <li class="card">
-                <div class="card-up">
-                    <h1 class="description">
-                        "Si eu am rachete nucleare"
-                    </h1>
-                </div>
-                <div class="card-down">
-                    <img src="https://cdnph.upi.com/svc/sv/i/2491477070462/2016/1/14770705616201/Kim-Jong-Un-maintains-weight-gain-drinks-excessively-report-says.jpg" alt="Profile picture" />
-                    <h3>
-                        Kim Jong Un
-                    </h3>
-                    <h2>Telefon: +40712345672</h2>
-                </div>
-                <div class="card-hover">
-                    <h3>Kim Jong Un</h3>
-                    <button>Copiaza numarul</button>
-                    <a href="profile.html">Profil</a>
-                </div>
-            </li>
+        <ul class="contacts-list">';
+        if($this->contacts != null) {
+            foreach($this->groups as $group) {
+                $this->body = $this->body . '
+                <li class="group-start">
+                    <p>' . $group -> name . '</p>
+                </li>';
+                    foreach($this->contacts as $card) {
+                        if($card->groupId == $group -> id) {
+                            $contactHTML = '
+                            <li class="card">
+                                <div class="card-up">
+                                    <h1 class="description">'. $card -> description.'</h1>';
+                            $contactHTML = $contactHTML . '
+                            </div>
+                                <div class="card-down">
+                                <img src="' . $card -> pictureURL . '" alt="Profile picture" />';
+                            $contactHTML = $contactHTML . '
+                            <h3>' . $card -> name . '</h3>';
+        
+                            $contactHTML = $contactHTML . '
+                            <h2>'. $card -> phone . '</h2>
+                            </div>
+                            <div class="card-hover">
+                                <h3>'. $card -> name . '</h3>
+                                <button>Copiaza numarul</button>
+                                <a href="profile.html">Profil</a>
+                                </div>
+                            </li>';
+                            $this->body = $this->body . $contactHTML;
+                        }
+                    }
+                }   
+            }
+            else  {
+                $this->body = $this->body . '<p>Nici un contact</p>';
+            }
+
+        $this->body = $this->body . '
         </ul>
         <script>
         var minAge = document.getElementById("age-min");
@@ -279,6 +136,14 @@ class HomeView extends View {
         }
         </script>
         ';
+    }
+
+    public function setContacts($contacts) {
+        $this->contacts = $contacts;
+    }
+
+    public function setGroups($groups) {
+        $this->groups = $groups;
     }
 
     public function getHeadTags() {

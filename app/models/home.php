@@ -40,7 +40,62 @@ class HomeModel extends Model
 
         //Afiseaza bara de navigatie
         $this->nav->showBody();
+
+        $cts = $this->getContacts();
+        $this->view->setContacts($cts);
+
+        $gps = $this->getGroups();
+        $this->view->setGroups($gps);
+
+        $this->view->constructBody();
         //Afiseaza pagina
         $this->view->showBody();
+    }
+
+    private function getContacts() {
+        $contacts = null;
+        $query = "SELECT * FROM contacts";
+        $result = $this->database->query($query);
+        if($result->num_rows > 0) {
+            $contacts = array();
+            while($row = $result->fetch_assoc()) {
+                $data = new ContactData;
+                $data -> id = $row["contactId"];
+                $data -> name = $row["name"];
+                $data -> phone = $row["phoneNumber1"];
+                $data -> phone2 = $row["phoneNumber2"];
+                $data -> email = $row["email1"];
+                $data -> email2 = $row["email2"];
+                $data -> description = $row["description"];
+                $data -> address = $row["address"];
+                $data -> birthDate = $row["birthDate"];
+                $data -> webAddress = $row["webAddress1"];
+                $data -> webAddress2 = $row["webAddress2"];
+                $data -> interests = $row["interests"];
+                $data -> studies = $row["studies"];
+                $data -> pictureURL = $row["pictureAddress"];
+                $data -> groupId = $row["groupId"];
+                $data -> userId = $row["userId"];
+                array_push($contacts, $data);
+            }
+        }
+        return $contacts;
+    }
+
+    private function getGroups() {
+        $groups = null;
+        $query = "SELECT * FROM groups";
+        $result = $this->database->query($query);
+        if($result->num_rows > 0) {
+            $groups = array();
+            while($row = $result->fetch_assoc()) {
+                $data = (object)[
+                    'id' => $row["groupId"],
+                    "name" => $row["name"]
+                ];
+                array_push($groups, $data);
+            }
+        }
+        return $groups;
     }
 }

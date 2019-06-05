@@ -16,5 +16,8 @@ class ContactData {
     public $webAddress2 = null;
     public $interests = null;
     public $studies = null;
+
+    public $groupId = null;
+    public $userId = null;
 }
 ?>
