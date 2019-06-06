@@ -47,6 +47,9 @@ class HomeModel extends Model
         $gps = $this->getGroups();
         $this->view->setGroups($gps);
 
+        $lcts = $this->getLocations();
+        $this->view->setLocations($lcts);
+
         $this->view->constructBody();
         //Afiseaza pagina
         $this->view->showBody();
@@ -97,5 +100,22 @@ class HomeModel extends Model
             }
         }
         return $groups;
+    }
+
+    private function getLocations() {
+        $locations = null;
+        $query = "SELECT SUBSTRING_INDEX(address,' ',-1) AS city FROM contacts";
+        $result = $this->database->query($query);
+        if($result->num_rows > 0) {
+            $locations = array();
+            while($row = $result->fetch_assoc()) {
+                if($row["city"] != null)
+                    array_push($locations, $row["city"]);
+            }
+        }
+        if($locations != null) {
+            array_unique($locations);
+        }
+        return $locations;
     }
 }

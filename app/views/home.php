@@ -5,6 +5,7 @@ class HomeView extends View {
     protected $body = '';
     protected $contacts = null;
     protected $groups = null;
+    protected $locations = null;
 
     public function __construct() {
         array_push($this->headTags, '<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">');
@@ -31,26 +32,23 @@ class HomeView extends View {
                 <h1>Varsta</h1>
                 <input name="age-min" id="age-min-input" class="age" type="number" value="8" min="8" max="56" />
                 <input name="age-max" id="age-max-input" class="age" type="number" value="120" min="56" max="120" />
-            </div>
-            <div class="filter-list-object">
-                <h1>Locatie</h1>
-                <input name="location" id="iasi" type="checkbox" value="Iasi" />
-                <label for="iasi" class="check-box">Iasi</label>
-                <input name="location" id="bucuresti" type="checkbox" value="Bucuresti" />
-                <label for="bucuresti" class="check-box">Bucuresti</label>
-                <input name="location" id="cluj" type="checkbox" value="Cluj" />
-                <label for="cluj" class="check-box">Cluj</label>
-                <input name="location" id="timisoara" type="checkbox" value="Timisoara" />
-                <label for="timisoara" class="check-box">Timisoara</label>
-            </div>
-            ';
+            </div>';
+            if($this->locations != null) {
+                $this->body = $this->body . '<div class="filter-list-object">
+                <h1>Locatie</h1>';
+                foreach($this->locations as $location) {
+                    $this->body = $this->body. '<input name="location" id="'.$location.'" type="checkbox" value="'.$location.'" />
+                    <label for="'.$location.'" class="check-box">'.$location.'</label>';
+                }
+                $this->body = $this->body . '</div>';
+            }
             $studies = [];
             foreach($this->contacts as $cont) {
-                if(!in_array($cont->studies, $studies) && $cont->studies != null) {
+                if($cont->studies != null) {
                     array_push($studies, $cont->studies);
                 }
             }
-
+            array_unique($studies);
             if(count($studies) > 0) {
                 $this->body = $this->body . '<div class="filter-list-object">
                 <h1>Scoala / Facultate</h1>';
@@ -104,8 +102,8 @@ class HomeView extends View {
                             </div>
                             <div class="card-hover">
                                 <h3>'. $card -> name . '</h3>
-                                <button>Copiaza numarul</button>
-                                <a href="profile.html">Profil</a>
+                                <button data-number="'.$card->phone.'" onclick="copyPhone(event)">Copiaza numarul</button>
+                                <a href="/public/contact/id='.$card->id.'">Profil</a>
                                 </div>
                             </li>';
                             $this->body = $this->body . $contactHTML;
@@ -120,30 +118,7 @@ class HomeView extends View {
 
         $this->body = $this->body . '
         </ul>
-        <script>
-        var minAgeInput = document.getElementById("age-min-input");
-        var maxAgeInput = document.getElementById("age-max-input");
-        minAgeInput.oninput = function() {
-            minAge.value = this.value;
-        }
-        maxAgeInput.oninput = function() {
-            maxAge.value = this.value;
-        }
-
-        function showFilters() {
-            var filters = document.getElementsByClassName("filter-list")[0];
-            var contacts = document.getElementsByClassName("contacts-list")[0];
-            filters.classList.add("filter-list-shown");
-            contacts.classList.add("hide-contacts-list");
-        }
-
-        function closeFilters() {
-            var filters = document.getElementsByClassName("filter-list")[0];
-            var contacts = document.getElementsByClassName("contacts-list")[0];
-            filters.classList.remove("filter-list-shown");
-            contacts.classList.remove("hide-contacts-list");
-        }
-        </script>
+        <script src="/../../public/javascript/home.js"></script>
         </body>
         ';
     }
@@ -154,6 +129,10 @@ class HomeView extends View {
 
     public function setGroups($groups) {
         $this->groups = $groups;
+    }
+
+    public function setLocations($locations) {
+        $this->locations = $locations;
     }
 
     public function getHeadTags() {

@@ -6,6 +6,7 @@ class NavigationView extends View {
     public function __construct() {
         array_push($this->headTags, '<link href="/../../public/styles/navigation.css" rel="stylesheet">');
         array_push($this->headTags, '<script src="/../../public/javascript/nav.js"></script>');
+        array_push($this->headTags, '<link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico" />');
 
         $this->body = '<body>
     <nav>
