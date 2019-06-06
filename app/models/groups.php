@@ -13,7 +13,12 @@ class GroupsModel extends Model {
 
     protected $tags = [];
 
-    public function loadModel() {
+    public function loadModel($newgroup = null) {
+
+        if($newgroup != null) {
+            $this->createNewGroup($newgroup);
+        }
+
         $this->nav = new NavigationView;
         $this->view = new GroupsView;
 
@@ -33,7 +38,16 @@ class GroupsModel extends Model {
         $this->view->setGroups($gps);
 
         $this->view->constructBody();
+        $this->nav->showBody();
         $this->view->showBody();
+    }
+
+    public function updateContactGroup($contact, $group){
+        $query = 'UPDATE contacts SET groupId=' . $group . ' WHERE contactId=' . $contact;
+        if(!($this->database->query($query) === TRUE)) {
+            die("An error occured! Please try again!");
+        }
+        else header("Location: /public/groups");
     }
 
     private function getContacts() {
@@ -70,6 +84,14 @@ class GroupsModel extends Model {
             }
         }
         return $groups;
+    }
+
+    private function createNewGroup($groupName) {
+        $query = 'INSERT INTO groups(name) VALUES ("' . $groupName . '")';
+        if(!($this->database->query($query) === TRUE)) {
+            die("An error occured! Please try again!");
+        }
+        else header("Location: /public/groups");
     }
 
 }

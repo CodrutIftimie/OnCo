@@ -24,7 +24,7 @@ class GroupsView extends View {
                     </li>';
                     foreach($this->contacts as $contact) {
                         if($contact->groupId == $group->id) {
-                            $this->body = $this->body . '<li class="contact" onclick="mark(event)">
+                            $this->body = $this->body . '<li class="contact" data-id=' .$contact->id. ' onclick="mark(event)">
                             <img class="contact-picture" src="'.$contact->pictureURL.'" alt="Profile Picture" />
                             <h2 class="contact-name">'.$contact->name.'</h2>
                         </li>
@@ -38,10 +38,13 @@ class GroupsView extends View {
     $this->body = $this->body . '</div>
     <div id="transition">
         <button id="left">⏪</button>
-        <select>
-            <option>Presedinti</option>
-            <option>Familie</option>
-        </select>
+        <select id="available-groups" name="newGroup">';
+            foreach($this->groups as $group) {
+                if($group->id > 0) {
+                    $this->body = $this->body . '<option value="' . $group->id .'">' . $group->name . '</option>';
+                }
+            }
+        $this->body = $this->body . '</select>
         <button id="new-group" onclick="inputGrup()">Grup nou</button>
         <button id="right">⏩</button>
     </div>
@@ -52,7 +55,7 @@ class GroupsView extends View {
                 $this->body = $this->body . '<ul class="group">';
                 foreach($this->contacts as $contact) {
                     if($contact->groupId == $group->id) {
-                        $this->body = $this->body . '<li class="contact" onclick="mark(event)">
+                        $this->body = $this->body . '<li class="contact" data-id=' .$contact->id. ' onclick="mark(event)">
                         <img class="contact-picture" src="'.$contact->pictureURL.'" alt="Profile Picture" />
                         <h2 class="contact-name">'.$contact->name.'</h2>
                     </li>
@@ -60,37 +63,12 @@ class GroupsView extends View {
                     }
                 }
                 $this->body = $this->body . '</ul>';
+                break;
             }
         }
     }
     $this->body = $this->body . '</div>
-    <script>
-        function checkMark() {
-            var contacts = document.getElementsByClassName("contact");
-            for (var index = 0; index < contacts.length; index++) {
-                if (contacts[index].classList[1] === "contact-selected") {
-                    alert("Poti selecta doar un singur contact");
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        function mark(event) {
-            if (event.currentTarget.classList[1] === "contact-selected")
-                event.currentTarget.classList.remove("contact-selected");
-            else if (checkMark())
-                event.currentTarget.classList.add("contact-selected");
-        }
-
-        function inputGrup() {
-            var txt;
-            var groupName = prompt("Numele noului grup:", "");
-            if (groupName == null || groupName == "") {
-                txt = "Nume invalid";
-            }
-        }
-    </script>
+    <script src="/../../public/javascript/groups.js"></script>
     </body>';
     }
 

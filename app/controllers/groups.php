@@ -9,7 +9,16 @@ class Groups extends Controller {
     }
 
     public function index($params) {
-        $this->model->loadModel();
+        $pars = $this->model->parseParams($params);
+        if(isset($pars["newgroup"])) {
+            $this->model->loadModel($pars["newgroup"]);
+        }
+        else if(isset($pars["move"])) {
+            if(isset($pars["to"])) {
+                $this->model->updateContactGroup($pars["move"],$pars["to"]);
+            }
+        }
+        else $this->model->loadModel();
     }
 }
 ?>

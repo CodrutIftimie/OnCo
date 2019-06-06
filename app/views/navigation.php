@@ -12,19 +12,19 @@ class NavigationView extends View {
         <div class="navigation-bar">
             <button id="show-slider" onclick="showSlider()">Meniu</button>
             <h5 id="website-name">OnCo</h5>
-            <a href="profile.html">Profil</a>
+            <a href="/public/contact/">Profil</a>
         </div>
         <div id="left-slider" class="slider">
             <div>
                 <button onclick="closeSlider()">❌</button>
             </div>
-            <a href="home">Acasa</a>
-            <a href="contact-edit">Adauga un contact</a>
-            <a href="groups">Gestioneaza gruparile</a>
+            <a href="/public">Acasa</a>
+            <a href="/public/contactedit/mode=add">Adauga un contact</a>
+            <a href="/public/groups">Gestioneaza gruparile</a>
             <a href="#">Export contacte vCard</a>
             <a href="#">Export contacte CSV</a>
             <a href="#">Feed Atom</a>
-            <a href="contact-edit">Editeaza Profilul</a>
+            <a href="/public/contactedit/mode=edit/id=2">Editeaza Profilul</a>
             <a href="#">Delogare</a>
         </div>
     </nav>

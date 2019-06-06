@@ -74,10 +74,18 @@ class HomeView extends View {
         <ul class="contacts-list">';
         if($this->contacts != null) {
             foreach($this->groups as $group) {
-                $this->body = $this->body . '
-                <li class="group-start">
-                    <p>' . $group -> name . '</p>
-                </li>';
+                $showGroup = false;
+                foreach($this->contacts as $card) {
+                    if($card->groupId == $group -> id) {
+                        $showGroup = true;
+                        break;
+                    }
+                }
+                if($showGroup == true) {
+                    $this->body = $this->body . '
+                    <li class="group-start">
+                        <p>' . $group -> name . '</p>
+                    </li>';
                     foreach($this->contacts as $card) {
                         if($card->groupId == $group -> id) {
                             $contactHTML = '
@@ -103,11 +111,12 @@ class HomeView extends View {
                             $this->body = $this->body . $contactHTML;
                         }
                     }
-                }   
+                }
             }
-            else  {
-                $this->body = $this->body . '<p>Nici un contact</p>';
-            }
+        }   
+        else  {
+            $this->body = $this->body . '<p>Nici un contact</p>';
+        }
 
         $this->body = $this->body . '
         </ul>
