@@ -135,6 +135,7 @@ class HomeView extends View {
             contacts.classList.remove("hide-contacts-list");
         }
         </script>
+        </body>
         ';
     }
 

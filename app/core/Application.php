@@ -7,6 +7,7 @@ class Application {
 
     public function __construct() {
         $url = $this->parseUrl();
+        
 
         if(file_exists('../app/controllers/'. $url[0] . '.php')) {
             $this->controller = $url[0];
@@ -25,7 +26,7 @@ class Application {
         }
 
         $this->params = $url ? array_values($url) : [];
-        call_user_func_array([$this->controller, $this->method], $this->params);
+        call_user_func_array([$this->controller, $this->method], array($this->params));
 
     }
 
