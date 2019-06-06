@@ -8,10 +8,8 @@ class Home extends Controller {
         $this->model = new HomeModel;
     }
 
-    public function index($params = []) {
+    public function index($params) {
         $this->model->loadModel();
-        
-        //$this->model->loadParams($params);
     }
 }
 ?>
