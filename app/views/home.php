@@ -20,12 +20,12 @@ class HomeView extends View {
     public function constructBody() {
         $this->body = 
         '<button id="show-filters" onclick="showFilters()">Filtre</button>
-        <form class="filter-list" method="GET" action="index.html">
+        <form class="filter-list" method="GET" action="localhost:8080/public/">
             <button id="close-filters" onclick="closeFilters()">❌ Inchide</button>
-            <button id="apply-filters" onclick="applyFilters()">Aplica</button>
+            <input type="submit" id="apply-filters" value="Aplica"/>
             <div class="filter-list-object">
                 <h1>Nume</h1>
-                <input name="name" type="text" placeholder="Klaus" />
+                <input name="name" type="text" placeholder="Nume" />
             </div>
             <div class="filter-list-object">
                 <h1>Varsta</h1>
@@ -43,19 +43,27 @@ class HomeView extends View {
                 <input name="location" id="timisoara" type="checkbox" value="Timisoara" />
                 <label for="timisoara" class="check-box">Timisoara</label>
             </div>
-            <div class="filter-list-object">
-                <h1>Scoala / Facultate</h1>
-                <input name="studies" id="fii" type="checkbox" value="FII" />
-                <label for="fii" class="check-box">Facultatea de Informatica</label>
-                <input name="studies" id="feaa" type="checkbox" value="FEAA" />
-                <label for="feaa" class="check-box">Facultatea de Economie și
-                        Administrarea Afacerilor</label>
-                <input name="studies" id="etti" type="checkbox" value="ETTI" />
-                <label for="etti" class="check-box">Facultatea de Electronică,
-                        Telecomunicații și Tehnologia Informației</label>
-                <input name="studies" id="chimie" type="checkbox" value="Chimie" />
-                <label for="chimie" class="check-box">Facultatea de Chimie</label>
-            </div>
+            ';
+            $studies = [];
+            foreach($this->contacts as $cont) {
+                if(!in_array($cont->studies, $studies) && $cont->studies != null) {
+                    array_push($studies, $cont->studies);
+                }
+            }
+
+            if(count($studies) > 0) {
+                $this->body = $this->body . '<div class="filter-list-object">
+                <h1>Scoala / Facultate</h1>';
+                $i = 0;
+                foreach($studies as $study) {
+                    $this->body = $this->body . '
+                    <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" />
+                    <label for="' . $i . '" class="check-box">' . $study . '</label>';
+                    $i = $i+1;
+                }
+                $this->body = $this->body . '</div>';
+            }
+            $this->body = $this->body . '
             <div class="filter-list-object">
                 <h1>Interese</h1>
                 <input name="interests" type="text" placeholder="ceai filme" />
@@ -104,16 +112,8 @@ class HomeView extends View {
         $this->body = $this->body . '
         </ul>
         <script>
-        var minAge = document.getElementById("age-min");
-        var maxAge = document.getElementById("age-max");
         var minAgeInput = document.getElementById("age-min-input");
         var maxAgeInput = document.getElementById("age-max-input");
-        minAge.oninput = function() {
-            minAgeInput.value = this.value;
-        }
-        maxAge.oninput = function() {
-            maxAgeInput.value = this.value;
-        }
         minAgeInput.oninput = function() {
             minAge.value = this.value;
         }
