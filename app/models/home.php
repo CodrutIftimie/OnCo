@@ -86,74 +86,85 @@ class HomeModel extends Model
         $this->stds = $this->getStudies();
         $this->checkFilters();
 
-        $query = "SELECT * FROM contacts WHERE";
+        $query = "SELECT * FROM contacts WHERE ";
+
+        $nameQr = "";
+        $addressQr = "";
+        $studiesQr = "";
+        $interestsQr = "";
 
         $somethingBefore = false;
         foreach($this->params as $key => $val) {
             if($key == 'name') {
-                $query = $query . " name LIKE '%" . $val . "%'";
-                $somethingBefore = true;
+                $nameQr = " name LIKE '%" . $val . "%'";
             }
         }
 
-        if($somethingBefore == true)
-            $condition = " AND (";
-        else $condition = "(";
+        if($nameQr != "") {
+            $somethingBefore = true;
+            $query = $query . $nameQr;
+        }
 
-        $foundAddress = false;
         foreach($this->params as $key => $val) {
             if($key == 'location') {
                 foreach($val as $single)
-                    $condition = $condition . " OR address LIKE '%" . $single . "%'";
-                    $foundAddress = true;
-                    $somethingBefore = true;
+                    if($addressQr == "")
+                        $addressQr = "(address LIKE '%" . $single . "%'";
+                    else $addressQr = $addressQr . " OR address LIKE '%" . $single . "%'";
             break;
             }
         }
 
-        if($foundAddress == true)
-            $query = $query . " (" . substr($condition, 5) . ")";
+        if($addressQr != "") {
+            if($somethingBefore == true) {
+                $query = $query . " AND " . $addressQr . ")";
+            }
+            else $query = $query . $addressQr . ")";
+            $somethingBefore = true;
+        }
 
 
-        if($somethingBefore == true)
-            $condition = " AND (studies";
-        else $condition = "(";
-
-        $foundStudies = false;
         foreach($this->params as $key => $val) {
             if($key == 'studies') {
                 foreach($val as $single)
-                    $condition = $condition . " OR studies='" . $single . "'";
-                    $foundStudies = true;
-                    $somethingBefore = true;
+                    if($studiesQr == "")
+                        $studiesQr = "(studies='" . $single . "'";
+                    else $studiesQr = $studiesQr . " OR studies='" . $single . "'";
             break;
             }
         }
 
-        if($foundStudies == true)
-            $query = $query . " (" . substr($condition, 5) . ")";
-
-        $foundInterests = false;
-
-        if($somethingBefore == true)
-            $condition = " AND (";
-        else $condition = "(";
+        if($studiesQr != "") {
+            if($somethingBefore == true) {
+                $query = $query . " AND " . $studiesQr . ")";
+            }
+            else $query = $query . $studiesQr . ")";
+            $somethingBefore = true;
+        }
 
         foreach($this->params as $key => $val) {
             if($key == 'interests') {
                 foreach($val as $single)
-                    $condition = $condition . " OR interests LIKE '%" . $single . "%'";
-                    $foundInterests = true;
-                    $somethingBefore = true;
+                if($interestsQr == "")
+                    $interestsQr = "(interests LIKE '%" . $single . "%'";
+                else $interestsQr = $interestsQr . " OR interests LIKE '%" . $single . "%'";
                     break;
             }
         }
 
-        if($foundInterests == true)
-            $query = $query . " (" . substr($condition, 5) . ")";
-        else if ($somethingBefore == false) {
+        if($interestsQr != "") {
+            if($somethingBefore == true) {
+                $query = $query . " AND " . $interestsQr . ")";
+            }
+            else $query = $query . $interestsQr . ")";
+            $somethingBefore = true;
+        }
+
+        if ($somethingBefore == false) {
             $query = "SELECT * FROM contacts";
         }
+
+        print_r($query . "<br><br>");
         $cts = $this->getContacts($query);
         $this->view->setContacts($cts);
 
