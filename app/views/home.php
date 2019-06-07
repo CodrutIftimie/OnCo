@@ -166,10 +166,9 @@ class HomeView extends View {
         $this->groups = $groups;
     }
 
-    public function setFilters($locations, $studies, $interests) {
+    public function setFilters($locations, $studies) {
         $this->locations = $locations;
         $this->studies = $studies;
-        $this->interests = $interests;
     }
 
     public function setParams($params) {

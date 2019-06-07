@@ -19,6 +19,8 @@ class Application {
                     unset($url[1]);
                 }
             }
+            if($url[0][0] == "?")
+                $url[0] = substr($url[0], 1);
             header("Location: " . implode("/",$url));
         }
         else {

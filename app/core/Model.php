@@ -21,7 +21,9 @@ class Model
             $result = [];
             foreach ((array)$params as $item) {
                 $split  = explode("=", $item);
-                $result[$split[0]] = $split[1];
+                if(!isset($result[$split[0]]))
+                    $result[$split[0]] = array($split[1]);
+                else array_push($result[$split[0]], $split[1]);
             }
         }
         return $result;
