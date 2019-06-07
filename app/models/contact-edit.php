@@ -60,6 +60,8 @@
             //Afiseaza bara de navigatie
             $this->nav->showBody();
             $this->view->setNumePagina("add");
+
+           
             $this->view->constructBody();
             //Afiseaza pagina
             $this->view->showBody();
@@ -100,13 +102,42 @@
             //print_r($this->contactId);
         }
 
-        public function getEditData(){
-            $query = 'UPDATE contacts 
-            SET name ='.', City= 'Frankfurt'
-            WHERE contactId="'.$contactId.'"' ;
+
+        public function addContact($vector){
+            $sql = 'INSERT INTO contacts (name,phoneNumber1,phoneNumber2,address,email1,email2,description,birthDate,webAddress1,webAddress2,interests,studies,groupId,pictureAddress)
+            VALUES (\'' .$vector["nume"]. '\',\''.$vector["nr_telefon1"].'\',\''.$vector["nr_telefon2"].'\',\''.$vector["adresa"].'\',\''.$vector["email1"].'\',\''.$vector["email2"].'\',
+            \''.$vector["descriere"].'\',\''.$vector["data_nastere"].'\',\''.$vector["adresa_web1"].'\',\''.$vector["adresa_web2"].'\',\''.$vector["interese"].'\'
+            ,\''.$vector["studii"].'\',0,\''.$vector["imagine"].'\')';
+            
+            if($this->database->query($sql) !== TRUE)
+                die("Eroare");
+            
         }
 
-
+        public function editContact($vector){
+            $sql = '
+            UPDATE contacts
+            SET name= \''.$vector["nume"].'\',
+            phoneNumber1= \''.$vector["nr_telefon1"].'\',
+            phoneNumber2=\''.$vector["nr_telefon2"].'\',
+            address=\''.$vector["adresa"].'\',
+            email1=\''.$vector["email1"].'\',
+            email2=\''.$vector["email2"].'\',
+            description=\''.$vector["descriere"].'\',
+            birthDate=\''.$vector["data_nastere"].'\',
+            webAddress1=\''.$vector["adresa_web1"].'\',
+            webAddress2=\''.$vector["adresa_web2"].'\',
+            interests=\''.$vector["interese"].'\',
+            studies=\''.$vector["studii"].'\',
+            pictureAddress=\''.$vector["imagine"].'\' 
+            WHERE contactId=\''.$vector["userId"].'\';
+            
+            ';
+            print_r($sql);
+            if($this->database->query($sql) !== TRUE)
+                die("Eroare");
+            
+        }
 
 
 
