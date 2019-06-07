@@ -371,7 +371,7 @@ class ContactEditView extends View {
                             <option value="Zimnicea">Zimnicea</option>
                             <option value="Zlatna">Zlatna</option>
                             
-                           ">
+                           
                         </select>
                         <br>
                         <label for="data_nastere">Data nastere</label><br>

@@ -18,13 +18,16 @@ class ContactEdit extends Controller {
        
 
         if(isset($parametru["mode"])){
-            if($parametru["mode"]== 'edit')
+            if($parametru["mode"]== 'edit'){
                 if(isset($parametru["id"])){
                     $this->model->setContactId($parametru['id']);
                     $this->model->loadModel('edit');  
                     
                 }
                 else
+                $this->model->loadModel('add');
+            }
+            else
                 $this->model->loadModel('add');
         }
         else
@@ -55,8 +58,6 @@ class ContactEdit extends Controller {
             else
                 $this->model->addContact($vector);
         }
-
-        
     }
 }
 ?>
