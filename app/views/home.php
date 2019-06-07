@@ -5,7 +5,11 @@ class HomeView extends View {
     protected $body = '';
     protected $contacts = null;
     protected $groups = null;
+
     protected $locations = null;
+    protected $studies = null;
+    protected $interests = null;
+    protected $params = null;
 
     public function __construct() {
         array_push($this->headTags, '<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">');
@@ -21,53 +25,84 @@ class HomeView extends View {
     public function constructBody() {
         $this->body = 
         '<button id="show-filters" onclick="showFilters()">Filtre</button>
-        <form class="filter-list" method="GET" action="localhost:8080/public/">
+        <form class="filter-list" method="GET" action="/public">
             <button id="close-filters" onclick="closeFilters()">❌ Inchide</button>
             <input type="submit" id="apply-filters" value="Aplica"/>
             <div class="filter-list-object">
-                <h1>Nume</h1>
-                <input name="name" type="text" placeholder="Nume" />
-            </div>
+                <h1>Nume</h1>';
+                if(isset($this->params["name"]))
+                    $this->body = $this->body . '<input name="name" type="text" placeholder="Nume" value="' . $this->params["name"]. '"/>';
+                else $this->body = $this->body . '<input name="name" type="text" placeholder="Nume" />';
+
+            $this->body = $this->body . '</div>
             <div class="filter-list-object">
-                <h1>Varsta</h1>
-                <input name="age-min" id="age-min-input" class="age" type="number" value="8" min="8" max="56" />
-                <input name="age-max" id="age-max-input" class="age" type="number" value="120" min="56" max="120" />
-            </div>';
+                <h1>Varsta</h1>';
+                if(isset($this->params["minage"])) {
+                    if(is_numeric($this->params["minage"]) && $this->params["minage"] >=8 && $this->params["minage"] <= 120)
+                        $this->body = $this->body . '<input name="age-min" id="age-min-input" class="age" type="number" value="'. (int)$this->params["minage"] .'" min="8" max="120" />';
+                    else $this->body = $this->body . '<input name="age-min" id="age-min-input" class="age" type="number" value="8" min="8" max="120" />';
+                }
+                else $this->body = $this->body . '<input name="age-min" id="age-min-input" class="age" type="number" value="8" min="8" max="120" />';
+
+                if(isset($this->params["maxage"])) {
+                    if(is_numeric($this->params["maxage"]) && $this->params["maxage"] >=8 && $this->params["maxage"] <= 120)
+                        $this->body = $this->body . '<input name="age-max" id="age-max-input" class="age" type="number" value="'. (int)$this->params["maxage"] .'" min="8" max="120" />';
+                    else $this->body = $this->body . '<input name="age-max" id="age-max-input" class="age" type="number" value="120" min="8" max="120" />';
+                }
+                else $this->body = $this->body . '<input name="age-max" id="age-max-input" class="age" type="number" value="120" min="8" max="120" />';
+
+            $this->body = $this->body . '</div>';
+
             if($this->locations != null) {
                 $this->body = $this->body . '<div class="filter-list-object">
                 <h1>Locatie</h1>';
                 foreach($this->locations as $location) {
-                    $this->body = $this->body. '<input name="location" id="'.$location.'" type="checkbox" value="'.$location.'" />
+                    if(isset($this->params["location"])) {
+                        if(in_array($location, $this->params["location"]))
+                            $this->body = $this->body. '<input name="location" id="'.$location.'" type="checkbox" value="'.$location.'" checked/>
+                        <label for="'.$location.'" class="check-box">'.$location.'</label>';
+                        else $this->body = $this->body. '<input name="location" id="'.$location.'" type="checkbox" value="'.$location.'"/>
+                        <label for="'.$location.'" class="check-box">'.$location.'</label>';
+                    }
+                    else $this->body = $this->body. '<input name="location" id="'.$location.'" type="checkbox" value="'.$location.'"/>
                     <label for="'.$location.'" class="check-box">'.$location.'</label>';
                 }
                 $this->body = $this->body . '</div>';
             }
-            $studies = [];
-            foreach($this->contacts as $cont) {
-                if($cont->studies != null) {
-                    array_push($studies, $cont->studies);
-                }
-            }
-            array_unique($studies);
-            if(count($studies) > 0) {
+            if(count($this->studies) > 0) {
                 $this->body = $this->body . '<div class="filter-list-object">
                 <h1>Scoala / Facultate</h1>';
                 $i = 0;
-                foreach($studies as $study) {
-                    $this->body = $this->body . '
-                    <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" />
-                    <label for="' . $i . '" class="check-box">' . $study . '</label>';
+                foreach($this->studies as $study) {
+                    if(isset($this->params["studies"])) {
+                        if(in_array($study, $this->params["studies"]))
+                            $this->body = $this->body . '
+                            <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" checked/>
+                            <label for="' . $i . '" class="check-box">' . $study . '</label>';
+                        else
+                            $this->body = $this->body . '
+                            <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" />
+                            <label for="' . $i . '" class="check-box">' . $study . '</label>';
+                    }
+                    else
+                        $this->body = $this->body . '
+                        <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" />
+                        <label for="' . $i . '" class="check-box">' . $study . '</label>';
                     $i = $i+1;
                 }
                 $this->body = $this->body . '</div>';
             }
             $this->body = $this->body . '
             <div class="filter-list-object">
-                <h1>Interese</h1>
-                <input name="interests" type="text" placeholder="ceai filme" />
+                <h1>Interese</h1>';
+                $intsStr = '';
+                if(isset($this->params["interests"])) {
+                    foreach($this->params["interests"] as $int)
+                        $intsStr = $intsStr . $int . ' ';
+                }
+                $this->body = $this->body . '<input name="interests" type="text" placeholder="ceai filme" value="'.$intsStr.'"/>
             </div>
             <input type="submit" style="display:none" />
-    
         </form>
         <ul class="contacts-list">';
         if($this->contacts != null) {
@@ -131,8 +166,14 @@ class HomeView extends View {
         $this->groups = $groups;
     }
 
-    public function setLocations($locations) {
+    public function setFilters($locations, $studies, $interests) {
         $this->locations = $locations;
+        $this->studies = $studies;
+        $this->interests = $interests;
+    }
+
+    public function setParams($params) {
+        $this->params = $params;
     }
 
     public function getHeadTags() {

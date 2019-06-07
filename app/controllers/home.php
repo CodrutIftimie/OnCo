@@ -9,6 +9,7 @@ class Home extends Controller {
     }
 
     public function index($params) {
+        $this->model->loadParams($params);
         $this->model->loadModel();
     }
 }

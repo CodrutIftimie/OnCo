@@ -15,14 +15,17 @@ class HomeModel extends Model
     protected $contacts = [];
     protected $tags = [];
 
+    protected $lcts = [];
+    protected $stds = [];
+    protected $ints = [];
+
     public function loadModel() {
         $this->nav = new NavigationView;
         $this->view = new HomeView;
         $this->loadDefault();
     }
 
-    public function loadParams($params = [])
-    {
+    public function loadParams($params = []) {
         $this->params = $this->parseParams($params);
     }
 
@@ -47,8 +50,13 @@ class HomeModel extends Model
         $gps = $this->getGroups();
         $this->view->setGroups($gps);
 
-        $lcts = $this->getLocations();
-        $this->view->setLocations($lcts);
+        $this->lcts = $this->getLocations();
+        $this->stds = $this->getStudies($cts);
+        $this->ints = $this->getInterests($cts);
+        $this->checkFilters();
+
+        $this->view->setFilters($this->lcts,$this->stds,$this->ints);
+        $this->view->setParams($this->params);
 
         $this->view->constructBody();
         //Afiseaza pagina
@@ -114,8 +122,59 @@ class HomeModel extends Model
             }
         }
         if($locations != null) {
-            array_unique($locations);
+            $locations = array_unique($locations);
         }
         return $locations;
+    }
+
+    private function getStudies($contacts) {
+        $studies = [];
+        foreach($contacts as $cont) {
+            if($cont->studies != null) {
+                array_push($studies, $cont->studies);
+            }
+        }
+        return array_unique($studies);
+    }
+
+    private function getInterests($contacts) {
+        $interests = [];
+        foreach($contacts as $cont) {
+            if($cont->studies != null) {
+                array_push($interests, $cont->interests);
+            }
+        }
+        return array_unique($interests);
+    }
+
+    private function checkFilters() {
+        $newArr = [];
+        if($this->params != null) {
+            foreach($this->params as $key => $val) {
+                if($key == "name" || $key == "minage" || $key == "maxage")
+                    $newArr[$key] = $val;
+                else if($key == "location") {
+                    $newArr[$key] = array();
+                    $vals = explode("|",$val);
+                    foreach($vals as $value) {
+                        $value = implode(" ", explode("+", $value));
+                        if(in_array($value,$this->lcts))
+                            array_push($newArr[$key], $value);
+                    }
+                }
+                else if($key == "studies") {
+                    $newArr[$key] = array();
+                    $vals = explode("|",$val);
+                    foreach($vals as $value) {
+                        $value = implode(" ", explode("+", $value));
+                        if(in_array($value,$this->stds))
+                            array_push($newArr[$key], $value);
+                    }
+                }
+                else if($key == "interests")
+                    $newArr[$key] = explode(" ",$val);
+            }
+        }
+        $this->params = $newArr;
     }
 }
