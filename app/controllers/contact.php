@@ -12,7 +12,7 @@ class Contact extends Controller {
     public function index($params = []) {
         $parametru=$this->model->parseParams($params);
         if(isset($parametru["id"])){
-            $this->model->setContactId($parametru['id']);
+            $this->model->setContactId($parametru['id'][0]);
             $this->model->loadModel();
         }
         

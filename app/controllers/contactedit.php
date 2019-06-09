@@ -18,9 +18,9 @@ class ContactEdit extends Controller {
        
 
         if(isset($parametru["mode"])){
-            if($parametru["mode"]== 'edit'){
+            if($parametru["mode"][0]== 'edit'){
                 if(isset($parametru["id"])){
-                    $this->model->setContactId($parametru['id']);
+                    $this->model->setContactId($parametru['id'][0]);
                     $this->model->loadModel('edit');  
                     
                 }
@@ -49,7 +49,7 @@ class ContactEdit extends Controller {
             $vector['adresa_web1']=$_POST['adresa_web1'];
             $vector['studii']=$_POST['studii'];
             $vector['imagine']=$_POST['imagine'];
-            $vector['userId']=$this->model->setContactId($parametru['id']);
+            $vector['userId']=$this->model->setContactId($parametru['id'][0]);
 
 
             

@@ -1,0 +1,112 @@
+<?php
+
+    require_once '../app/views/navigation.php';
+    require_once '../app/views/header.php';
+    require_once '../app/views/authentication.php';
+
+    class AuthenticationModel extends Model {
+        protected $nav = null;
+        protected $head = null;
+        protected $view = null;
+        protected $tags = [];
+        protected $data = [];
+        protected $contactId = null;
+
+        public function loadModel() {
+            $this->nav = new NavigationView;
+            $this->view = new AuthenticationView;
+            $this->loadDefault();
+        }
+
+
+
+        public function loadDefault(){
+            foreach ($this->nav->getHeadTags() as $tag) {
+                array_push($this->tags, $tag);
+            }
+            foreach ($this->view->getHeadTags() as $tag) {
+                array_push($this->tags, $tag);
+            }
+
+            //incarca tagul <head>
+            $this->head = new Header($this->tags, "Autentificare");
+
+            //Afiseaza bara de navigatie
+            $this->nav->showBody();
+
+            $this->view->constructBody();
+            //Afiseaza pagina
+            $this->view->showBody();
+
+        }
+        public function loadParams($params = []) {
+            $this->params = $this->parseParams($params);
+        }
+
+        public function register($vector){
+            $sql = 'INSERT INTO contacts (name,phoneNumber1,phoneNumber2,address,email1,email2,description,birthDate,webAddress1,webAddress2,interests,studies,groupId,pictureAddress)
+            VALUES (\'' .$vector["nume"]. '\',\''.$vector["nr_telefon1"].'\',\''.$vector["nr_telefon2"].'\',\''.$vector["adresa"].'\',\''.$vector["email1"].'\',\''.$vector["email2"].'\',
+            \''.$vector["descriere"].'\',\''.$vector["data_nastere"].'\',\''.$vector["adresa_web1"].'\',\''.$vector["adresa_web2"].'\',\''.$vector["interese"].'\'
+            ,\''.$vector["studii"].'\',0,\''.$vector["imagine"].'\')';
+            if($this->database->query($sql) !== TRUE)
+                die("Eroare add");
+
+            $ctId =' SELECT contactId FROM contacts Where email1=\''.$vector["email1"].'\'' ;
+            $result = $this->database->query($ctId);
+            if($result->num_rows == 0)
+                die("EROARE");
+            else {
+                $id = $result->fetch_assoc()["contactId"];
+
+                $user = 'INSERT INTO users (name,email,contactId,password)
+                VALUES (\'' .$vector["nume"]. '\',\''.$vector["email1"].'\',\''.$id.'\',\''.$vector["parola"].'\')';
+                if($this->database->query($user) !== TRUE)
+                    die("Eroare users");
+            }
+
+            $idUser =' SELECT userId FROM users Where email=\''.$vector["email1"].'\'' ;
+            $result = $this->database->query($idUser);
+            if($result->num_rows == 0)
+                die("EROARE");
+            else {
+                $id1 = $result->fetch_assoc()["userId"];
+                $update = '
+                UPDATE contacts
+                SET userId= \''.$id1.'\'
+                WHERE contactId=\''.$id.'\';
+                ';
+                
+                if($this->database->query($update) !== TRUE)
+                    die('Eroare update userId');
+            }
+
+        }
+
+        public function login($vector){
+
+            $sql =' SELECT email,password FROM users Where email=\''.$vector["email"].'\' and  password=\''.$vector["parola"].'\' ' ;
+            $result = $this->database->query($sql);
+            print_r($sql);
+            print_r($result);
+            if($result->num_rows == 0)
+                echo "<script>alert(\"Email sau parola incorecta!\");</script>";
+            else
+                return 1;
+            
+
+        }
+
+        
+
+      
+    
+
+
+        
+
+
+    
+
+
+    }
+?>
