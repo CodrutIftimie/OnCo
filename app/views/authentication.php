@@ -78,8 +78,6 @@ class AuthenticationView extends View {
         $this->values=$val;
     }
 
-  
-    
 }
 
 ?>

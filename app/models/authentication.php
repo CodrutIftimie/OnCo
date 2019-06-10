@@ -84,29 +84,39 @@
 
         public function login($vector){
 
-            $sql =' SELECT email,password FROM users Where email=\''.$vector["email"].'\' and  password=\''.$vector["parola"].'\' ' ;
+            $sql =' SELECT userId,email,password FROM users Where email=\''.$vector["email"].'\' and  password=\''.$vector["parola"].'\' ' ;
             $result = $this->database->query($sql);
-            print_r($sql);
-            print_r($result);
+    
             if($result->num_rows == 0)
                 echo "<script>alert(\"Email sau parola incorecta!\");</script>";
             else
+            {
+                $id = $result->fetch_assoc()["userId"];
+                $secret = "oParolaFoarteGrea";
+                $head= self::base64url_encode('{"alg": "HS256","typ": "JWT"}');
+                $time = new DateTime;
+                $time->modify('+ 1 hour');
+                $payload = self::base64url_encode('{"id": '.$id.', "exp": "'. $time->format('Y-m-d H:i:s').'"}');
+                $concat = $head. '.' .$payload;
+                $signature = hash_hmac('sha256', $concat, $secret);
+                print_r($signature);
+
+                $value = $head.'.'.$payload.'.'.$signature;
+                print_r("<br><br>".$value);
+                setcookie("authentication", null, -1, '/');
+                setcookie("authentication",$value, time() + 3600, '/');
                 return 1;
-            
+            }
 
         }
 
-        
-
-      
-    
-
-
-        
-
-
-    
-
+        public static function base64url_encode($data) { 
+            return rtrim(strtr(base64_encode($data), '+/', '-_'), '='); 
+          } 
+          
+        public static function base64url_decode($data) { 
+            return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT)); 
+          } 
 
     }
 ?>

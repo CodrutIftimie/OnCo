@@ -23,7 +23,7 @@
 
 
         public function loadDefault(){
-            print_r("CEva");
+            
             foreach ($this->nav->getHeadTags() as $tag) {
                 array_push($this->tags, $tag);
             }
