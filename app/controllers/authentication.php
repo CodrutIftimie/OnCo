@@ -31,8 +31,7 @@ class Authentication extends Controller {
                         $vector['studii']=' ';
                         $vector['imagine']=' ';
                         $this->model->register($vector);
-                        header("Location: /public/home/");
-                        
+                        header("Location: /public/home/"); 
                     }
                     break;
 
@@ -43,7 +42,6 @@ class Authentication extends Controller {
                         $vector['parola']=$_POST['parola'];
                         if($this->model->login($vector) == 1 )
                             header("Location: /public/home/");  
-
                     }
                     break;
 
@@ -51,6 +49,13 @@ class Authentication extends Controller {
                     break;
             }
         }
+        
+    }
+
+    public function logout($params = []){
+        setcookie("authentication", null, -1, "/");
+        unset($_SESSION["userId"]);
+        header("Location: /public/authentication");
     }
 }
 ?>

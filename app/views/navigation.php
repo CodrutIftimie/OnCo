@@ -26,7 +26,7 @@ class NavigationView extends View {
             <a href="#">Export contacte CSV</a>
             <a href="#">Feed Atom</a>
             <a href="/public/contactedit/mode=edit/id=2">Editeaza Profilul</a>
-            <a href="#">Delogare</a>
+            <a href="/public/authentication/logout">Delogare</a>
         </div>
     </nav>
 ';
