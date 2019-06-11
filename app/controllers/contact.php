@@ -13,14 +13,14 @@ class Contact extends Controller {
         $parametru=$this->model->parseParams($params);
 
         if(isset($_POST["exp"]))
-            header("Location: /public/export/".$_POST["exp"]."/id=".$_POST["id"]);
+            header("Location: /public/export/".$this->model->database->real_escape_string($_POST["exp"])."/id=".$this->model->database->real_escape_string($_POST["id"]));
 
         if(isset($parametru["id"])){
-            $this->model->setContactId($parametru['id'][0]);
+            $this->model->setContactId($this->model->database->real_escape_string($parametru['id'][0]));
             $this->model->loadModel();
         }
         else if(isset($_POST["edit"])) {
-            $this->model->edit($_POST["id"]);
+            $this->model->edit($this->model->database->real_escape_string($_POST["id"]));
         }
         //$this->model->loadParams($params);
     }

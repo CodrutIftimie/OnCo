@@ -11,10 +11,12 @@ class Application {
 
     public function __construct() {
 
-        self::$atomFeed = new AtomFeed;
-        self::$atomFeed->title = "Feed ATOM";
-        self::$atomFeed->addcategories(["Adaugari contacte", "Modificari contacte"]);
-        self::$atomFeed->addauthor("Server");
+        if(self::$atomFeed == null) {
+            self::$atomFeed = new AtomFeed;
+            self::$atomFeed->title = "Feed ATOM";
+            self::$atomFeed->addcategories(["Adaugari contacte", "Modificari contacte"]);
+            self::$atomFeed->addauthor("Server");
+        }
 
         $tokenValid = false;
 

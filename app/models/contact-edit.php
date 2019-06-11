@@ -150,10 +150,8 @@
 
             if($this->database->query($em) !== TRUE)
                 die("Eroare");
-            else echo "<script>window.location.assign(\"/public/contactedit/mode=edit/id=".$vector["contactId"]."\");</script>";
-
-            
-            
+            else
+                echo "<script>window.location.assign(\"/public/contactedit/mode=edit/id=".$vector["contactId"]."\");</script>";
         }
 
 

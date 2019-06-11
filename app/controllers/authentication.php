@@ -24,9 +24,9 @@ class Authentication extends Controller {
                 case 'Submit_register':
                     if(isset($_POST['nume'])){
                         $vector = array();
-                        $vector['nume']=$_POST['nume'];
-                        $vector['email1']=$_POST['email'];
-                        $vector['parola']=$_POST['parola'];
+                        $vector['nume']=$this->model->database->real_escape_string($_POST['nume']);
+                        $vector['email1']=$this->model->database->real_escape_string($_POST['email']);
+                        $vector['parola']=$this->model->database->real_escape_string($_POST['parola']);
                         $vector['adresa']='';
                         $vector['data_nastere']='';
                         $vector['email2']='';
@@ -46,8 +46,8 @@ class Authentication extends Controller {
                 case 'Submit_login':
                     if(isset($_POST['utilizator'])){
                         $vector = array();
-                        $vector['email']=$_POST['utilizator'];
-                        $vector['parola']=$_POST['parola'];
+                        $vector['email']=$this->model->database->real_escape_string($_POST['utilizator']);
+                        $vector['parola']=$this->model->database->real_escape_string($_POST['parola']);
                         if($this->model->login($vector) == 1 )
                             header("Location: /public/home/");  
                     }

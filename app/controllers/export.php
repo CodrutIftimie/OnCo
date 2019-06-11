@@ -19,7 +19,7 @@ class Export extends Controller {
         $parametru=$this->model->parseParams($params);
         if(isset($parametru['id']))
             {
-                $this->model->exportCSV($parametru['id'][0]);
+                $this->model->exportCSV($this->model->database->real_escape_string($parametru['id'][0]));
             }
         else {
             $this->model->exportCSV();
@@ -30,7 +30,7 @@ class Export extends Controller {
         $parametru = $this->model->parseParams($params);
         if(isset($parametru['id']))
         {
-            $this->model->exportVCARD($parametru['id'][0]);
+            $this->model->exportVCARD($this->model->database->real_escape_string($parametru['id'][0]));
         }
         else {
             $this->model->exportVCARD();
