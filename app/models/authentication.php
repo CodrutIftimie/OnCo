@@ -13,7 +13,6 @@
         protected $contactId = null;
 
         public function loadModel() {
-            $this->nav = new NavigationView;
             $this->view = new AuthenticationView;
             $this->loadDefault();
         }
@@ -21,18 +20,12 @@
 
 
         public function loadDefault(){
-            foreach ($this->nav->getHeadTags() as $tag) {
-                array_push($this->tags, $tag);
-            }
             foreach ($this->view->getHeadTags() as $tag) {
                 array_push($this->tags, $tag);
             }
 
             //incarca tagul <head>
             $this->head = new Header($this->tags, "Autentificare");
-
-            //Afiseaza bara de navigatie
-            $this->nav->showBody();
 
             $this->view->constructBody();
             //Afiseaza pagina
