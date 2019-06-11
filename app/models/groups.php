@@ -43,7 +43,7 @@ class GroupsModel extends Model {
     }
 
     public function updateContactGroup($contact, $group){
-        $query = 'UPDATE contacts SET groupId=' . $group . ' WHERE contactId=' . $contact;
+        $query = 'UPDATE contacts SET groupId=' . $group . ' WHERE contactId=' . $contact. ' AND userId = ' .$_SESSION["userId"];
         if(!($this->database->query($query) === TRUE)) {
             die("An error occured! Please try again!");
         }
@@ -52,7 +52,7 @@ class GroupsModel extends Model {
 
     private function getContacts() {
         $contacts = null;
-        $query = "SELECT * FROM contacts";
+        $query = "SELECT * FROM contacts WHERE userId = ". $_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $contacts = array();
@@ -71,7 +71,7 @@ class GroupsModel extends Model {
 
     private function getGroups() {
         $groups = null;
-        $query = "SELECT * FROM groups";
+        $query = "SELECT * FROM groups WHERE groupId = 0 OR userId = " .$_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $groups = array();
@@ -87,7 +87,7 @@ class GroupsModel extends Model {
     }
 
     private function createNewGroup($groupName) {
-        $query = 'INSERT INTO groups(name) VALUES ("' . $groupName . '")';
+        $query = 'INSERT INTO groups(name, userId) VALUES ("' . $groupName . '","'.$_SESSION["userId"].'")';
         if(!($this->database->query($query) === TRUE)) {
             die("An error occured! Please try again!");
         }

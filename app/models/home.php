@@ -86,17 +86,17 @@ class HomeModel extends Model
         $this->stds = $this->getStudies();
         $this->checkFilters();
 
-        $query = "SELECT * FROM contacts WHERE ";
+        $query = "SELECT * FROM contacts WHERE userId = ".$_SESSION["userId"];;
 
         $nameQr = "";
         $addressQr = "";
         $studiesQr = "";
         $interestsQr = "";
 
-        $somethingBefore = false;
+        $somethingBefore = true;
         foreach($this->params as $key => $val) {
             if($key == 'name') {
-                $nameQr = " name LIKE '%" . $val . "%'";
+                $nameQr = " AND name LIKE '%" . $val . "%'";
             }
         }
 
@@ -161,10 +161,8 @@ class HomeModel extends Model
         }
 
         if ($somethingBefore == false) {
-            $query = "SELECT * FROM contacts";
+            $query = "SELECT * FROM contacts WHERE userId = " .$_SESSION["userId"];
         }
-
-        print_r($query . "<br><br>");
         $cts = $this->getContacts($query);
         $this->view->setContacts($cts);
 
@@ -181,7 +179,7 @@ class HomeModel extends Model
         $contacts = null;
         $query = "";
         if($qr == null)
-            $query = "SELECT * FROM contacts";
+            $query = "SELECT * FROM contacts WHERE userId = " .$_SESSION["userId"];
         else $query = $qr;
         $result = $this->database->query($query);
         if (!$result) {
@@ -217,7 +215,7 @@ class HomeModel extends Model
 
     private function getGroups() {
         $groups = null;
-        $query = "SELECT * FROM groups";
+        $query = "SELECT * FROM groups WHERE groupId = 0 OR userId = " .$_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $groups = array();
@@ -234,7 +232,7 @@ class HomeModel extends Model
 
     private function getLocations() {
         $locations = null;
-        $query = "SELECT SUBSTRING_INDEX(address,' ',-1) AS city FROM contacts";
+        $query = "SELECT SUBSTRING_INDEX(address,' ',-1) AS city FROM contacts WHERE userId = " .$_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $locations = array();
@@ -252,7 +250,7 @@ class HomeModel extends Model
     private function getStudies() {
 
         $studies = null;
-        $query = "SELECT studies FROM contacts";
+        $query = "SELECT studies FROM contacts WHERE userId = " .$_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $studies = array();
@@ -265,14 +263,6 @@ class HomeModel extends Model
             $studies = array_unique($studies);
         }
         return $studies;
-
-        // $studies = [];
-        // foreach($contacts as $cont) {
-        //     if($cont->studies != null) {
-        //         array_push($studies, $cont->studies);
-        //     }
-        // }
-        // return array_unique($studies);
     }
 
     private function checkFilters() {

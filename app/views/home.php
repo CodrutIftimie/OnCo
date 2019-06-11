@@ -69,7 +69,7 @@ class HomeView extends View {
                 }
                 $this->body = $this->body . '</div>';
             }
-            if(count($this->studies) > 0) {
+            if(count($this->studies) > 0 && $this->studies[0] != " ") {
                 $this->body = $this->body . '<div class="filter-list-object">
                 <h1>Scoala / Facultate</h1>';
                 $i = 0;
@@ -105,7 +105,7 @@ class HomeView extends View {
             <input type="submit" style="display:none" />
         </form>
         <ul class="contacts-list">';
-        if($this->contacts != null) {
+        if($this->contacts != null && $this->groups != null) {
             foreach($this->groups as $group) {
                 $showGroup = false;
                 foreach($this->contacts as $card) {

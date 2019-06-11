@@ -100,7 +100,7 @@ class Application {
                 }
                 
                 $this->params = $url ? array_values($url) : [];
-                if(get_class($this->controller) != "Authentication")
+                if(get_class($this->controller) != "Authentication" || (get_class($this->controller) == "Authentication" && $this->method == "logout"))
                     call_user_func_array([$this->controller, $this->method], array($this->params));
                 else {
                     header("Location: /public");
