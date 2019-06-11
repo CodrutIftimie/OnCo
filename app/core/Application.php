@@ -1,12 +1,20 @@
 <?php
 session_start();
+require_once "AtomFeed.php";
 
 class Application {
     protected $controller = 'home';
     protected $method = 'index';
     protected $params = [];
 
+    public static $atomFeed = null; 
+
     public function __construct() {
+
+        self::$atomFeed = new AtomFeed;
+        self::$atomFeed->title = "Feed ATOM";
+        self::$atomFeed->addcategories(["Adaugari contacte", "Modificari contacte"]);
+        self::$atomFeed->addauthor("Server");
 
         $tokenValid = false;
 
