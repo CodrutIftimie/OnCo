@@ -87,7 +87,7 @@ class GroupsModel extends Model {
     }
 
     private function createNewGroup($groupName) {
-        $query = 'INSERT INTO groups(name, userId) VALUES ("' . $groupName . '","'.$_SESSION["userId"].'")';
+        $query = 'INSERT INTO groups(name, userId) VALUES ("' . utf8_decode(urldecode($groupName)) . '","'.$_SESSION["userId"].'")';
         if(!($this->database->query($query) === TRUE)) {
             die("An error occured! Please try again!");
         }

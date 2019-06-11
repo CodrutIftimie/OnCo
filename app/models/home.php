@@ -232,13 +232,13 @@ class HomeModel extends Model
 
     private function getLocations() {
         $locations = null;
-        $query = "SELECT SUBSTRING_INDEX(address,' ',-1) AS city FROM contacts WHERE userId = " .$_SESSION["userId"];
+        $query = "SELECT address FROM contacts WHERE userId = " .$_SESSION["userId"];
         $result = $this->database->query($query);
         if($result->num_rows > 0) {
             $locations = array();
             while($row = $result->fetch_assoc()) {
-                if($row["city"] != null)
-                    array_push($locations, $row["city"]);
+                if($row["address"] != null)  
+                    array_push($locations, $row["address"]);
             }
         }
         if($locations != null) {

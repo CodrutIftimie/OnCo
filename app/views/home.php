@@ -69,12 +69,12 @@ class HomeView extends View {
                 }
                 $this->body = $this->body . '</div>';
             }
-            if(count($this->studies) > 0 && $this->studies[0] != " ") {
+            if(count($this->studies) > 0) {
                 $this->body = $this->body . '<div class="filter-list-object">
                 <h1>Scoala / Facultate</h1>';
                 $i = 0;
                 foreach($this->studies as $study) {
-                    if(isset($this->params["studies"])) {
+                    if(isset($this->params["studies"]) && $study != "") {
                         if(in_array($study, $this->params["studies"]))
                             $this->body = $this->body . '
                             <input name="studies" id="'. $i .'" type="checkbox" value="'. $study .'" checked/>

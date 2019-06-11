@@ -18,10 +18,12 @@ function mark(event) {
 
 function inputGrup() {
     var groupName = prompt("Numele noului grup:", "");
-    if (groupName == null || groupName == "") {
+    if (groupName.trim() == "") {
         alert("Nume invalid");
+    } else if (groupName === null) {
+        return;
     } else {
-        window.location.assign("/public/groups/newgroup=" + groupName);
+        window.location.assign("/public/groups/newgroup=" + groupName.trim());
     }
 }
 var left = document.getElementById("left");
