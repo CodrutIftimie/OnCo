@@ -56,23 +56,16 @@
                                 $row["email2"],$row["description"],$row["address"],$row["birthDate"],$row["webAddress1"],$row["webAddress2"],
                                 $row["interests"],$row["studies"],$row["pictureAddress"],$row["groupId"],$row["userId"]);
                     fputcsv($fp, $date, ',', '"');
+                
                 }
                 fclose($fp);  
                
             }
             
-        }
-
-        public function exportVCARD($id = -1){
-
-
-            $sql ='SELECT * FROM contacts WHERE contactId=\''.$id.'\';';;
-            $result = $this->database->query($sql);
             
-            $vcardExport = new VcardExport();
-            $vcardExport->contactVcardExportService($result);
-           
         }
+
+       
 
 
     }

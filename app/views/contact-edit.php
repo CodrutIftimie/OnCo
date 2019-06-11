@@ -20,21 +20,36 @@ class ContactEditView extends View {
 
 
         if($this->values == null) {
-
-            $this->values->name="";            
-            $this->values->description="";
-            $this->values->phone ="";
-            $this->values->pictureURL="";
-
-            $this->values->phone2="";
-            $this->values->email = "";
-            $this->values->email2 = "";
-            $this->values->address = "";
-            $this->values->birthDate = "";
-            $this->values->webAddress = "";
-            $this->values->webAddress2 = "";
-            $this->values->interests = "";
-            $this->values->studies = "";
+            $this->values = (object) [
+                'name' => '',
+                'description' => '',
+                'phone' => '',
+                'pictureURL' => '',
+                'phone1' =>'',
+                'phone2' => '',
+                'email' => '',
+                'email2' => '',
+                'address' => '',
+                'birthDate' => '',
+                'webAddress' => '',
+                'webAddress2' => '',
+                'interests' => '',
+                'studies' => ''
+            ];
+            // $this->values->name="";            
+            // $this->values->description="";
+            // $this->values->phone ="";
+            // $this->values->pictureURL="";
+            // $this->values->phone1="";
+            // $this->values->phone2="";
+            // $this->values->email = "";
+            // $this->values->email2 = "";
+            // $this->values->address = "";
+            // $this->values->birthDate = "";
+            // $this->values->webAddress = "";
+            // $this->values->webAddress2 = "";
+            // $this->values->interests = "";
+            // $this->values->studies = "";
 
         }
 
@@ -382,7 +397,7 @@ class ContactEditView extends View {
                         <input id="email1" type="email" name="email1" placeholder="Introduceti un E-mail" value="' .$this->values->email. '"><br>
                         <input id="email2" type="email" name="email2" placeholder="* Introduceti un alt E-mail" value="' .$this->values->email2. '"><br>
                         <label for="nr_telefon1">Numar de telefon</label><br>
-                        <input id="nr_telefon1" type="text" name="nr_telefon1" placeholder="0712345678" value="' .$this->values->phone. '"><br>
+                        <input id="nr_telefon1" type="text" name="nr_telefon1" placeholder="0712345678" value="' .$this->values->phone1. '"><br>
                         <input id="nr_telefon2" type="text" name="nr_telefon2" placeholder="* 0712345678" value="' .$this->values->phone2. '"><br>
                         <label for="adresa_web1">Adresa web</label><br>
                         <input id="adresa_web1" type="text" name="adresa_web1" placeholder="https://web-adress.com" value="' .$this->values->webAddress. '"><br>

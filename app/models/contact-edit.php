@@ -79,7 +79,7 @@
                     $data = new ContactData;
                     $data -> id = $row["contactId"];
                     $data -> name = $row["name"];
-                    $data -> phone = $row["phoneNumber1"];
+                    $data -> phone1 = $row["phoneNumber1"];
                     $data -> phone2 = $row["phoneNumber2"];
                     $data -> email = $row["email1"];
                     $data -> email2 = $row["email2"];

@@ -29,16 +29,7 @@ class Export extends Controller {
     }
 
     public function vcard($params = []) {
-        $parametru=$this->model->parseParams($params);
-        if(isset($parametru['id']))
-            {
-                $this->model->exportVCARD($parametru['id'][0]);
-                header("Location: /public");
-            }
-        else {
-            $this->model->exportVCARD();
-            header("Location: /public");
-            } 
+      
     }
 }
 ?>

@@ -25,21 +25,36 @@ class ContactView extends View {
 
         if($this->values == null) {
 
-            $this->values->name="";            
-            $this->values->description="";
-            $this->values->phone ="";
-            $this->values->pictureURL="";
-
-            $this->values->phone2="";
-            $this->values->email = "";
-            $this->values->email2 = "";
-            $this->values->address = "";
-            $this->values->birthDate = "";
-            $this->values->webAddress = "";
-            $this->values->webAddress2 = "";
-            $this->values->interests = "";
-            $this->values->studies = "";
-
+            $this->values = (object) [
+                'name' => '',
+                'description' => '',
+                'phone' => '',
+                'pictureURL' => '',
+                'phone1' =>'',
+                'phone2' => '',
+                'email' => '',
+                'email2' => '',
+                'address' => '',
+                'birthDate' => '',
+                'webAddress' => '',
+                'webAddress2' => '',
+                'interests' => '',
+                'studies' => ''
+            ];
+            // $this->values->name="";            
+            // $this->values->description="";
+            // $this->values->phone ="";
+            // $this->values->pictureURL="";
+            // $this->values->phone1="";
+            // $this->values->phone2="";
+            // $this->values->email = "";
+            // $this->values->email2 = "";
+            // $this->values->address = "";
+            // $this->values->birthDate = "";
+            // $this->values->webAddress = "";
+            // $this->values->webAddress2 = "";
+            // $this->values->interests = "";
+            // $this->values->studies = "";
         }
 
         $this->body = '
@@ -65,7 +80,7 @@ class ContactView extends View {
             $this->body = $this->body.'
 
 
-            <p>☎ Numar de telefon: ' .$this->values->phone. '</p>';
+            <p>☎ Numar de telefon: ' .$this->values->phone1. '</p>';
             if($this->values->phone2!="")
                 $this->body = $this->body.'<p>☎ Numar de telefon 2:' .$this->values->phone2. '</p>';
             $this->body = $this->body.'
@@ -96,6 +111,7 @@ class ContactView extends View {
         </form>
         <form action="/public/contact" method="post">
             <div class="export">
+                <input name="id" id="id" value="'.$this->contact.'" hidden />
                 <button name="edit" type="submit" value="Editeaza">Editeaza</button>
             </div>
         <form>

@@ -20,7 +20,7 @@ class Contact extends Controller {
             $this->model->loadModel();
         }
         else if(isset($_POST["edit"])) {
-            $this->model->edit($parametru["id"][0]);
+            $this->model->edit($_POST["id"]);
         }
         //$this->model->loadParams($params);
     }
