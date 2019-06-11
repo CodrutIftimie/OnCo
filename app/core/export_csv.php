@@ -7,7 +7,7 @@ $database = "onco";
 $connection = mysqli_connect($server,$username,$password,$database);
 $fisier = 'fisier.csv';
 $fp = fopen($fisier,'w');
-$sql = "SELECT * from contacts";
+$sql = "SELECT * FROM contacts WHERE contactId=\''.$_SESSION["contactId"].'\';';
 $result = mysqli_query($connection, $sql);
 while( $row =  mysqli_fetch_row($result)) 
 {

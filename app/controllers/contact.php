@@ -11,16 +11,17 @@ class Contact extends Controller {
 
     public function index($params = []) {
         $parametru=$this->model->parseParams($params);
+
+        if(isset($_POST["exp"]))
+            header("Location: /public/export/".$_POST["exp"]."/id=".$_POST["id"]);
+
         if(isset($parametru["id"])){
             $this->model->setContactId($parametru['id'][0]);
             $this->model->loadModel();
         }
-
-        if(isset($_POST["edit"])) {
+        else if(isset($_POST["edit"])) {
             $this->model->edit($parametru["id"][0]);
         }
-
-        
         //$this->model->loadParams($params);
     }
 }

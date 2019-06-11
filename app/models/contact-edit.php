@@ -105,6 +105,11 @@
 
 
         public function addContact($vector){
+            if($vector["imagine"] == "")
+                $vector["imagine"]="/../../public/styles/default_profile_icon.png";
+            if($vector["data_nastere"] == "") {
+                $vector["data_nastere"] = "1990-01-01";
+            }
             $sql = 'INSERT INTO contacts (name,userId,phoneNumber1,phoneNumber2,address,email1,email2,description,birthDate,webAddress1,webAddress2,interests,studies,groupId,pictureAddress)
             VALUES (\'' .$vector["nume"]. '\',\''.$_SESSION["userId"].'\',\''.$vector["nr_telefon1"].'\',\''.$vector["nr_telefon2"].'\',\''.$vector["adresa"].'\',\''.$vector["email1"].'\',\''.$vector["email2"].'\',
             \''.$vector["descriere"].'\',\''.$vector["data_nastere"].'\',\''.$vector["adresa_web1"].'\',\''.$vector["adresa_web2"].'\',\''.$vector["interese"].'\'
@@ -136,6 +141,18 @@
             if($this->database->query($sql) !== TRUE)
                 die("Eroare");
             else echo "<script>window.location.assign(\"/public/contactedit/mode=edit/id=".$vector["contactId"]."\");</script>";
+
+            $em = '
+            UPDATE users
+            SET 
+            email= \''.$vector["email1"].'\'
+            WHERE contactId=\''.$vector["contactId"].'\';';
+
+            if($this->database->query($em) !== TRUE)
+                die("Eroare");
+            else echo "<script>window.location.assign(\"/public/contactedit/mode=edit/id=".$vector["contactId"]."\");</script>";
+
+            
             
         }
 

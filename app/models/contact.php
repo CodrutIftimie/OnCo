@@ -15,6 +15,7 @@
         public function loadModel() {
             $this->nav = new NavigationView;
             $this->view = new ContactView;
+            $this->view->setContactId($this->contactId);
            
              $this->loadDefault();
         }

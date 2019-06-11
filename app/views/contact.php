@@ -5,6 +5,7 @@ class ContactView extends View {
     protected $body = '';
     protected $values = null;
     protected $numePagina = null;
+    protected $contact = null;
 
     public function __construct() {
 
@@ -84,13 +85,16 @@ class ContactView extends View {
         </div>
     </div>
     <div id="bottom-butoane">
-        <div class="export">
-            <button name="exp" type="submit" value="submit_export1">Export CSV</button>
-        </div>
-        <div class="export">
-            <button name="exp" type="submit" value="submit_export2">Export vCard</button>
-        </div>
-        <form action"" method="post">
+        <form action="/public/contact" method="post">
+        <input id="id" name="id" value="'.$this->contact.'" hidden/>
+            <div class="export">
+                <button name="exp" type="submit" value="csv">Export CSV</button>
+            </div>
+            <div class="export">
+                <button name="exp" type="submit" value="vcard">Export vCard</button>
+            </div>
+        </form>
+        <form action="/public/contact" method="post">
             <div class="export">
                 <button name="edit" type="submit" value="Editeaza">Editeaza</button>
             </div>
@@ -111,7 +115,9 @@ class ContactView extends View {
         $this->values=$val;
     }
 
-  
+    public function setContactId($id) {
+        $this->contact = $id;
+    }
     
 }
 

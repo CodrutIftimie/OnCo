@@ -19,17 +19,17 @@ class Authentication extends Controller {
                         $vector['nume']=$_POST['nume'];
                         $vector['email1']=$_POST['email'];
                         $vector['parola']=$_POST['parola'];
-                        $vector['adresa']=' ';
-                        $vector['data_nastere']=' ';
-                        $vector['email2']=' ';
-                        $vector['descriere']=' ';
-                        $vector['nr_telefon1']=' ';
-                        $vector['nr_telefon2']=' ';
-                        $vector['interese']=' ';
-                        $vector['adresa_web2']=' ';
-                        $vector['adresa_web1']=' ';
-                        $vector['studii']=' ';
-                        $vector['imagine']='https://www.french-weekendbreaks.co.uk/sites/uk.picardiev3/themes/picardiev3/img_v2/user-default.jpg';
+                        $vector['adresa']='';
+                        $vector['data_nastere']='';
+                        $vector['email2']='';
+                        $vector['descriere']='';
+                        $vector['nr_telefon1']='';
+                        $vector['nr_telefon2']='';
+                        $vector['interese']='';
+                        $vector['adresa_web2']='';
+                        $vector['adresa_web1']='';
+                        $vector['studii']='';
+                        $vector['imagine']='/../../public/styles/default_profile_icon.png';
                         $this->model->register($vector);
                         header("Location: /public/home/"); 
                     }
