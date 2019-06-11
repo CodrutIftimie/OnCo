@@ -33,6 +33,7 @@ class Application {
                 if($signature != $newSig) {
                     setcookie("authentication", null, -1, "/");
                     unset($_SESSION["userId"]);
+                    unset($_SESSION["contactId"]);
                     header("Location: /public/authentication");
                 }
                 else {
@@ -40,12 +41,14 @@ class Application {
                     $payload = AuthenticationModel::base64url_decode($payload);
                     $vals = json_decode($payload);
                     $_SESSION["userId"]=$vals->id;
+                    $_SESSION["contactId"]=$vals->cid;
                     
                     $tokenTime = new DateTime($vals->exp);
                     $currentTime = new DateTime();
                     if($currentTime > $tokenTime) {
                         setcookie("authentication", null, -1, "/");
                         unset($_SESSION["userId"]);
+                        unset($_SESSION["contactId"]);
                         header("Location: /public/authentication");
                     }
                     else $tokenValid = true;

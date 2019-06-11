@@ -38,6 +38,7 @@
             $data=$this->getContactData($this->contactId);
             $this->view->setValues($data);
             $this->view->setNumePagina("edit");
+            $this->view->setContactId($this->contactId);
             $this->view->constructBody();
             //Afiseaza pagina
             $this->view->showBody();
@@ -104,8 +105,8 @@
 
 
         public function addContact($vector){
-            $sql = 'INSERT INTO contacts (name,phoneNumber1,phoneNumber2,address,email1,email2,description,birthDate,webAddress1,webAddress2,interests,studies,groupId,pictureAddress)
-            VALUES (\'' .$vector["nume"]. '\',\''.$vector["nr_telefon1"].'\',\''.$vector["nr_telefon2"].'\',\''.$vector["adresa"].'\',\''.$vector["email1"].'\',\''.$vector["email2"].'\',
+            $sql = 'INSERT INTO contacts (name,userId,phoneNumber1,phoneNumber2,address,email1,email2,description,birthDate,webAddress1,webAddress2,interests,studies,groupId,pictureAddress)
+            VALUES (\'' .$vector["nume"]. '\',\''.$_SESSION["userId"].'\',\''.$vector["nr_telefon1"].'\',\''.$vector["nr_telefon2"].'\',\''.$vector["adresa"].'\',\''.$vector["email1"].'\',\''.$vector["email2"].'\',
             \''.$vector["descriere"].'\',\''.$vector["data_nastere"].'\',\''.$vector["adresa_web1"].'\',\''.$vector["adresa_web2"].'\',\''.$vector["interese"].'\'
             ,\''.$vector["studii"].'\',0,\''.$vector["imagine"].'\')';
             
@@ -130,12 +131,11 @@
             interests=\''.$vector["interese"].'\',
             studies=\''.$vector["studii"].'\',
             pictureAddress=\''.$vector["imagine"].'\' 
-            WHERE contactId=\''.$vector["userId"].'\';
-            
-            ';
-            print_r($sql);
+            WHERE contactId=\''.$vector["contactId"].'\';';
+
             if($this->database->query($sql) !== TRUE)
                 die("Eroare");
+            else echo "<script>window.location.assign(\"/public/contactedit/mode=edit/id=".$vector["contactId"]."\");</script>";
             
         }
 

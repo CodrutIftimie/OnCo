@@ -13,7 +13,7 @@ class NavigationView extends View {
         <div class="navigation-bar">
             <button id="show-slider" onclick="showSlider()">Meniu</button>
             <h5 id="website-name">OnCo</h5>
-            <a href="/public/contact/id='.$_SESSION["userId"].'">Profil</a>
+            <a href="/public/contact/id='.$_SESSION["contactId"].'">Profil</a>
         </div>
         <div id="left-slider" class="slider">
             <div>
@@ -25,7 +25,7 @@ class NavigationView extends View {
             <a href="#">Export contacte vCard</a>
             <a href="#">Export contacte CSV</a>
             <a href="#">Feed Atom</a>
-            <a href="/public/contactedit/mode=edit/id='.$_SESSION["userId"].'">Editeaza Profilul</a>
+            <a href="/public/contactedit/mode=edit/id='.$_SESSION["contactId"].'">Editeaza Profilul</a>
             <a href="/public/authentication/logout">Delogare</a>
         </div>
     </nav>

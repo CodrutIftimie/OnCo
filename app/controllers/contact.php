@@ -15,6 +15,11 @@ class Contact extends Controller {
             $this->model->setContactId($parametru['id'][0]);
             $this->model->loadModel();
         }
+
+        if(isset($_POST["edit"])) {
+            $this->model->edit($parametru["id"][0]);
+        }
+
         
         //$this->model->loadParams($params);
     }

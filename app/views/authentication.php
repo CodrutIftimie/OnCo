@@ -44,7 +44,7 @@ class AuthenticationView extends View {
 
                     <br><br>
                     <button name="submit" type="submit" value="Submit_register">Register</button><br>
-                    <button type="button" onclick="login()">Am deja un cont !</button>
+                    <button type="button" onclick="login()">Am deja un cont!</button>
                 </form>
             </div>
             <div class="login " id="js2" style="display: block">
@@ -58,7 +58,7 @@ class AuthenticationView extends View {
                     <br><br>
                     <button name="submit" type="submit" value="Submit_login">Login</button>
                     <br>
-                    <button type="button" onclick="login()">Vreau imi fac cont! !</button>
+                    <button type="button" onclick="login()">Vreau imi fac cont!</button>
                 </form>
             </div>
         </div>

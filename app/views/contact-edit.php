@@ -5,6 +5,7 @@ class ContactEditView extends View {
     protected $body = '';
     protected $values = null;
     protected $numePagina = null;
+    protected $contactId = null;
 
     public function __construct() {
 
@@ -46,6 +47,7 @@ class ContactEditView extends View {
                     <h1>'.$this->numePagina.'</h1>
 
                     <form action="/public/contactedit/" method="post">
+                        <input id="contactid" name="contactid" value="'.$this->contactId.'" hidden/>
                         <label for="nume_prenume">Nume complet</label><br>
                         <input id="nume_prenume" type="text" name="nume" placeholder="Introduceti numele si prenumele" value="' .$this->values->name. '"><br>
                         <label for="adresa">Oras</label><br>
@@ -427,6 +429,11 @@ class ContactEditView extends View {
         else
             $this->numePagina="Adauga un contact";
 
+    }
+
+    public function setContactId($id){
+        $this->contactId=$id;
+        //print_r($this->contactId);
     }
     
 }

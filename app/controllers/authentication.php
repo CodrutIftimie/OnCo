@@ -29,7 +29,7 @@ class Authentication extends Controller {
                         $vector['adresa_web2']=' ';
                         $vector['adresa_web1']=' ';
                         $vector['studii']=' ';
-                        $vector['imagine']=' ';
+                        $vector['imagine']='https://www.french-weekendbreaks.co.uk/sites/uk.picardiev3/themes/picardiev3/img_v2/user-default.jpg';
                         $this->model->register($vector);
                         header("Location: /public/home/"); 
                     }

@@ -77,25 +77,27 @@
 
         public function login($vector){
 
-            $sql =' SELECT userId,email,password FROM users Where email=\''.$vector["email"].'\' and  password=\''.$vector["parola"].'\' ' ;
+            $sql =' SELECT userId,contactId,email,password FROM users Where email=\''.$vector["email"].'\' and  password=\''.$vector["parola"].'\' ' ;
             $result = $this->database->query($sql);
     
             if($result->num_rows == 0)
                 echo "<script>alert(\"Email sau parola incorecta!\");</script>";
             else
             {
-                $id = $result->fetch_assoc()["userId"];
+                $row = $result->fetch_assoc();
+                $id = $row["userId"];
+                $contactId = $row["contactId"];
                 $secret = "oParolaFoarteGrea";
                 $head= self::base64url_encode('{"alg": "HS256","typ": "JWT"}');
                 $time = new DateTime;
                 $time->modify('+ 1 hour');
-                $payload = self::base64url_encode('{"id": '.$id.', "exp": "'. $time->format('Y-m-d H:i:s').'"}');
+                $payload = self::base64url_encode('{"id": '.$id.', "cid": '.$contactId.', "exp": "'. $time->format('Y-m-d H:i:s').'"}');
                 $concat = $head. '.' .$payload;
                 $signature = hash_hmac('sha256', $concat, $secret);
-                print_r($signature);
+              
 
                 $value = $head.'.'.$payload.'.'.$signature;
-                print_r("<br><br>".$value);
+                
                 setcookie("authentication", null, -1, '/');
                 setcookie("authentication",$value, time() + 3600, '/');
                 return 1;

@@ -78,14 +78,9 @@
             
         }
 
-      
-
-
-
-
-
-    
-
+        public function edit($id) {
+            header("Location: /public/contactedit/mode=edit/id=".$id);
+        }
 
     }
 ?>

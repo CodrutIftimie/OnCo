@@ -85,11 +85,16 @@ class ContactView extends View {
     </div>
     <div id="bottom-butoane">
         <div class="export">
-                <button type="submit" value="submit_export1">Export CSV</button>
+            <button name="exp" type="submit" value="submit_export1">Export CSV</button>
         </div>
         <div class="export">
-            <button type="submit" value="submit_export2">Export vCard</button>
+            <button name="exp" type="submit" value="submit_export2">Export vCard</button>
         </div>
+        <form action"" method="post">
+            <div class="export">
+                <button name="edit" type="submit" value="Editeaza">Editeaza</button>
+            </div>
+        <form>
     </div>
 </body>';
     }
