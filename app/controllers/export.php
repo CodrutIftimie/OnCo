@@ -20,16 +20,21 @@ class Export extends Controller {
         if(isset($parametru['id']))
             {
                 $this->model->exportCSV($parametru['id'][0]);
-                header("Location: /public");
             }
         else {
             $this->model->exportCSV();
-            header("Location: /public");
             }   
     }
 
     public function vcard($params = []) {
-      
+        $parametru = $this->model->parseParams($params);
+        if(isset($parametru['id']))
+        {
+            $this->model->exportVCARD($parametru['id'][0]);
+        }
+        else {
+            $this->model->exportVCARD();
+        }
     }
 }
 ?>

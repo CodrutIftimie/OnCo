@@ -36,7 +36,7 @@
         }
 
         public function exportCSV($id = -1){
-            $fisier = 'fisier.csv';
+            $fisier = 'export.csv';
             $fp = fopen($fisier,'w');
             $sql = '';
             if($id != -1)
@@ -58,15 +58,66 @@
                     fputcsv($fp, $date, ',', '"');
                 
                 }
-                fclose($fp);  
                
             }
-            
-            
+            fclose($fp);
+            $file_url = 'http://localhost:8080/public/export.csv';
+            header('Content-Type: application/octet-stream');
+            header("Content-Transfer-Encoding: Binary"); 
+            header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\""); 
+            echo readfile($file_url);
         }
 
-       
+        public function exportVCARD($id = -1) {
+            $sql = '';
+            if($id != -1)
+                $sql = 'SELECT * FROM contacts WHERE contactId=\''.$id.'\';';
+            else $sql = 'SELECT * FROM contacts WHERE userId=\''.$_SESSION["userId"].'\';';
 
+            $result = $this->database->query($sql);
+            if(!$result){
+                die($this->database->error);
+            }
+            else
+            {
+                include_once("../app/core/VCardIFL-PHP5.php");
+                $cards = "";
+                $i=0;
+                $lname = "";
+                while($row = $result->fetch_assoc()) 
+                {
+                    $lname = $row["name"];
+                    $dataArray=array(
+                        "fileName"=>"contact", //file name
+                        "saveTo"=>"upload",  //upload dir
+                        
+                        "vcard_birtda"=> '\"' .$row["birthDate"] . '\"',              
+                        "vcard_f_name"=>'\"'.explode(" ", $row["name"])[0].'\"',
+                        "vcard_s_name"=>'\"'.count(explode(" ", $row["name"]))>1?explode(" ", $row["name"])[1]:"".'\"',                 
+                        "vcard_uri"=>'\"'.$row["webAddress1"].'\"',
+                        "vcard_note"=>'\"'.$row["description"].'\"',
+                        "vcard_cellul"=>'\"'.$row["phoneNumber1"].'\"',
+                        
+                        "vcard_h_city"=>'\"'.$row["address"].'\"',
+                        "vcard_h_mail"=>'\"'.$row["email1"].'\"',
+                        );
+
+                        $vcard=new VCardIFL($dataArray);
+                        
+                        //Create Vcart By Your Setup or array
+                        $vcard->createVcard();
+                        $cards = $cards . $vcard->getText();
+                        $i++;
+                }
+                $name = "";
+                if($i>1) $name = "contacts";
+                else $name = $lname;
+                header("Content-type: text/directory");
+                header("Content-Disposition: attachment; filename=".$name.".vcf"."");
+                header("Pragma: public");
+                print $cards;
+            }
+        }
 
     }
 
