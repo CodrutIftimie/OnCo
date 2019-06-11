@@ -105,6 +105,15 @@
 
         }
 
+        public function checkEmail($email) {
+            $sql =' SELECT userId FROM users Where email=\''.$email.'\'';
+            $result = $this->database->query($sql);
+    
+            if($result->num_rows == 0)
+                echo "Nu exista cont cu acest email.";
+            else echo "Exista cont cu acest email! ";
+        }
+
         public static function base64url_encode($data) { 
             return rtrim(strtr(base64_encode($data), '+/', '-_'), '='); 
           } 

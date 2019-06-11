@@ -9,8 +9,16 @@ class Authentication extends Controller {
     }
 
     public function index($params = []) {
+        $param = $this->model->parseParams($params);
+        $email = "";
+        if(isset($param["checkEmail"])) {
+            $email = $param["checkEmail"][0];
+            $this->model->checkEmail($email);
+        }
+        else {
+            if(isset($param[0]))
+                die($param[0]);
         $this->model->loadModel($params);
-
         if(isset($_POST["submit"])) {
             switch($_POST['submit']) {
                 case 'Submit_register':
@@ -49,6 +57,7 @@ class Authentication extends Controller {
                     break;
             }
         }
+    }
         
     }
 

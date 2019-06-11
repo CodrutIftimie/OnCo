@@ -32,11 +32,12 @@ class AuthenticationView extends View {
             <div class="card">
             <div class="register" id="js1" style="display: none">
                 <h1>Register</h1>
+                <p id="validare"></p>
                 <form action="/public/authentication/" method="post">
                     <label for="nume">Nume complet</label><br>
                     <input id="nume" type="text" name="nume" placeholder="Introduceti numele" required ><br>
                     <label for="email">E-mail</label><br>
-                    <input id="email" type="email" name="email" placeholder="Introduceti un E-mail" required><br>
+                    <input id="email" type="email" name="email" placeholder="Introduceti un E-mail" required onkeyup="checkEmail(this.value)"><br>
                     <label for="parola">Parola</label><br>
                     <input id="parola" type="password" name="parola" placeholder="Introduceti o parola" required><br>
 

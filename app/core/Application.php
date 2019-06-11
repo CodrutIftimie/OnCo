@@ -113,8 +113,14 @@ class Application {
         else {
             require_once '../app/controllers/authentication.php';
             $controller = new Authentication;
-            $params = [];
-            call_user_func_array([$controller, "index"], $params);
+            $uri = $_SERVER['REQUEST_URI'];
+            $explval = explode("?",$uri);
+            if(count($explval)>1) {
+                $uri = $explval[1];
+                $uri = explode("/",$uri)[0];
+                call_user_func_array([$controller, "index"], array($uri));
+            }
+            else call_user_func_array([$controller, "index"], []);
         }
     }
 
