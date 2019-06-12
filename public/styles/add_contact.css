@@ -28,7 +28,8 @@ textarea {
     margin: 10px 0;
 }
 
-input {
+input,
+select {
     text-align: center;
     width: 400px;
     padding: 12px 20px;
