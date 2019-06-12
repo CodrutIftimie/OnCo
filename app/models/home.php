@@ -270,14 +270,14 @@ class HomeModel extends Model
         if($this->params != null) {
             foreach($this->params as $key => $val) {
                 if($key == "age-max" || $key == "age-min")
-                    $newArr[$key] = $this->model->database->real_escape_string($val[0]);
+                    $newArr[$key] = $this->database->real_escape_string($val[0]);
                 else if($key == "name") {
-                    $newArr[$key] = implode(" ", explode("+",$this->model->database->real_escape_string($val[0])));
+                    $newArr[$key] = implode(" ", explode("+",$this->database->real_escape_string($val[0])));
                 }
                 else if($key == "location") {
                     $newArr[$key] = array();
                     foreach($val as $value) {
-                        $value = implode(" ", explode("+", $this->model->database->real_escape_string($value)));
+                        $value = implode(" ", explode("+", $this->database->real_escape_string($value)));
                         if(in_array($value,$this->lcts))
                             array_push($newArr[$key], $value);
                     }
@@ -285,13 +285,13 @@ class HomeModel extends Model
                 else if($key == "studies") {
                     $newArr[$key] = array();
                     foreach($val as $value) {
-                        $value = implode(" ", explode("+", $this->model->database->real_escape_string($value)));
+                        $value = implode(" ", explode("+", $this->database->real_escape_string($value)));
                         if(in_array($value,$this->stds))
                             array_push($newArr[$key], $value);
                     }
                 }
                 else if($key == "interests")
-                    $newArr[$key] = explode("+",$this->model->database->real_escape_string($val[0]));
+                    $newArr[$key] = explode("+",$this->database->real_escape_string($val[0]));
             }
         }
         $this->params = $newArr;
