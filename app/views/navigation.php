@@ -22,9 +22,9 @@ class NavigationView extends View {
             <a href="/public">Acasa</a>
             <a href="/public/contactedit/mode=add">Adauga un contact</a>
             <a href="/public/groups">Gestioneaza gruparile</a>
-            <a href="#">Export contacte vCard</a>
+            <a href="/public/export/vcard">Export contacte vCard</a>
             <a href="/public/export/csv/">Export contacte CSV</a>
-            <a href="/public/export/vcard/">Feed Atom</a>
+            <a href="#">Feed Atom</a>
             <a href="/public/contactedit/mode=edit/id='.$_SESSION["contactId"].'">Editeaza Profilul</a>
             <a href="/public/authentication/logout">Delogare</a>
         </div>
